@@ -1,0 +1,111 @@
+@font-face {
+  font-family: 'liberation_monobold';
+    src: url('fonts/liberationmono_bold_cyrillic/LiberationMono-Bold-webfont.eot');
+    src: url('fonts/liberationmono_bold_cyrillic/LiberationMono-Bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/liberationmono_bold_cyrillic/LiberationMono-Bold-webfont.woff') format('woff'),
+         url('fonts/liberationmono_bold_cyrillic/LiberationMono-Bold-webfont.ttf') format('truetype'),
+         url('fonts/liberationmono_bold_cyrillic/LiberationMono-Bold-webfont.svg#liberation_monobold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+  font-family: 'liberation_monobold_italic';
+    src: url('fonts/liberationmono_bolditalic_cyrillic/LiberationMono-BoldItalic-webfont.eot');
+    src: url('fonts/liberationmono_bolditalic_cyrillic/LiberationMono-BoldItalic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/liberationmono_bolditalic_cyrillic/LiberationMono-BoldItalic-webfont.woff') format('woff'),
+         url('fonts/liberationmono_bolditalic_cyrillic/LiberationMono-BoldItalic-webfont.ttf') format('truetype'),
+         url('fonts/liberationmono_bolditalic_cyrillic/LiberationMono-BoldItalic-webfont.svg#liberation_monobold_italic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+  font-family: 'liberation_monoitalic';
+    src: url('fonts/liberationmono_italic_cyrillic/LiberationMono-Italic-webfont.eot');
+    src: url('fonts/liberationmono_italic_cyrillic/LiberationMono-Italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/liberationmono_italic_cyrillic/LiberationMono-Italic-webfont.woff') format('woff'),
+         url('fonts/liberationmono_italic_cyrillic/LiberationMono-Italic-webfont.ttf') format('truetype'),
+         url('fonts/liberationmono_italic_cyrillic/LiberationMono-Italic-webfont.svg#liberation_monoitalic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+  font-family: 'liberation_monoregular';
+    src: url('fonts/liberationmono_regular_cyrillic/LiberationMono-Regular-webfont.eot');
+    src: url('fonts/liberationmono_regular_cyrillic/LiberationMono-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/liberationmono_regular_cyrillic/LiberationMono-Regular-webfont.woff') format('woff'),
+         url('fonts/liberationmono_regular_cyrillic/LiberationMono-Regular-webfont.ttf') format('truetype'),
+         url('fonts/liberationmono_regular_cyrillic/LiberationMono-Regular-webfont.svg#liberation_monoregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+  font-family: 'isocpeurregular';
+    src: url('fonts/isocpeur-webfont/isocpeur-webfont.eot');
+    src: url('fonts/isocpeur-webfont/isocpeur-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/isocpeur-webfont/isocpeur-webfont.woff') format('woff'),
+         url('fonts/isocpeur-webfont/isocpeur-webfont.ttf') format('truetype'),
+         url('fonts/isocpeur-webfont/isocpeur-webfont.svg#isocpeurregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'bebas_neue_cyrillicregular';
+    src: url('fonts/bebas/bebas_neue_cyrillic-webfont.eot');
+    src: url('fonts/bebas/bebas_neue_cyrillic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/bebas/bebas_neue_cyrillic-webfont.woff') format('woff'),
+         url('fonts/bebas/bebas_neue_cyrillic-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+tt,
+var,
+pre,
+kbd,
+samp,
+code {
+  font-family: Consolas, 'Bitstream Vera Sans Mono', 'Courier New', Courier, monospace !important;
+  font-size: 0.9em;
+  font-style: normal;
+}
+
+/*h1,h2,h3,h4,h5,h6{
+    font-family: "isocpeurregular";
+    color:#3498db;
+}*/
+
+.slide h2{
+    font-family: "isocpeurregular" !important;
+    color:#3498db;
+    font-size: 60px;
+}
+
+.slide ol, .slide ul {
+    margin: 0 0 48px 50px;
+    counter-reset: list;
+    font-size: 30px;
+}
+
+section img{
+  width: 100%;
+}
+
+.slide>div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    padding: 50px;
+    width: 924px;
+    height: 640px;
+}
+
+section{
+    font-family:
+}
