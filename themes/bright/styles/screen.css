@@ -195,6 +195,8 @@ svg{
   left: auto;
 }
 
+.code9 pre{font-size: 0.9em;}
+.code10 pre{font-size: 1.0em;}
 .code11 pre{font-size: 1.1em;}
 .code12 pre{font-size: 1.2em;}
 .code13 pre{font-size: 1.3em;}
@@ -202,6 +204,11 @@ svg{
 .code15 pre{font-size: 1.5em;}
 .code16 pre{font-size: 1.6em;}
 .code17 pre{font-size: 1.7em;}
+
+.codecenter{text-align: center;}
+.noheader h2{
+  display: none;
+}
 
 .slide.cover img, 
 .slide.cover svg, 

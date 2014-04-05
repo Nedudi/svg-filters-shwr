@@ -475,9 +475,9 @@ style: |
 </svg>
 
 
-## **Возможности SVG фильтров**
+## **типы SVG фильтров<br> &lt;fe...Фильтр&gt;**
 
-
+## **feComponentTransfer**
 
 ## feComponentTransfer
 {:.code13}
@@ -554,7 +554,6 @@ style: |
      <feFuncR type="linear" slope="10" intercept="-4"/>
      <feFuncG type="linear" slope="1.5" intercept="1"/>
      <feFuncB type="linear" slope="2" intercept="-1"/>
-     <feFuncB type="linear" slope="1.5" intercept="-1"/>
     </feComponentTransfer>
 
 ## feComponentTransfer
@@ -566,12 +565,365 @@ style: |
            <feFuncR type="linear" slope="10" intercept="-4"/>
            <feFuncG type="linear" slope="1.5" intercept="1"/>
            <feFuncB type="linear" slope="2" intercept="-1"/>
-           <feFuncB type="linear" slope="1.5" intercept="-1"/>
           </feComponentTransfer>
         </filter>
     </defs>
     <image filter="url(#f33)" xlink:href="girl.jpg" width="100%" height="100%"  preserveAspectRatio="xMidYMid meet"/>
 </svg>
+
+## feComponentTransfer
+{:.code12}
+    <feComponentTransfer>
+      <<mark>feFunc<mark>R</mark></mark> <mark>type="<mark>discrete</mark>"</mark> <mark>tableValues="<mark>0 0.5 1</mark>"</mark> />
+      <<mark>feFunc<mark>G</mark></mark> <mark>type="<mark>discrete</mark>"</mark> <mark>tableValues="<mark>0 0.5 1</mark>"</mark> />
+      <<mark>feFunc<mark>B</mark></mark> <mark>type="<mark>discrete</mark>"</mark> <mark>tableValues="<mark>0 0.5 1</mark>"</mark> />
+    </feComponentTransfer>
+
+## feComponentTransfer
+
+<svg class="cover" width="570" height="400">
+    <defs>
+        <filter id="f34" >
+          <feComponentTransfer>
+            <feFuncR type="discrete" tableValues="0 0.5 1"/>
+            <feFuncG type="discrete" tableValues="0 0.5 1"/>
+            <feFuncB type="discrete" tableValues="0 0.5 1"/>
+          </feComponentTransfer>
+        </filter>
+    </defs>
+    <image filter="url(#f34)" xlink:href="girl.jpg" width="100%" height="100%"  preserveAspectRatio="xMidYMid meet"/>
+</svg>
+
+## feComponentTransfer
+{:.code12}
+    <feComponentTransfer>
+      <<mark>feFunc<mark>R</mark></mark> <mark>type="<mark>table</mark>"</mark> <mark>tableValues="<mark>1 0</mark>"</mark> />
+      <<mark>feFunc<mark>G</mark></mark> <mark>type="<mark>table</mark>"</mark> <mark>tableValues="<mark>1 0</mark>"</mark> />
+      <<mark>feFunc<mark>B</mark></mark> <mark>type="<mark>table</mark>"</mark> <mark>tableValues="<mark>1 0</mark>"</mark> />
+    </feComponentTransfer>
+
+## feComponentTransfer
+
+<svg class="cover" width="570" height="400">
+    <defs>
+        <filter id="f36" >
+          <feComponentTransfer>
+            <feFuncR type="table" tableValues="1 0"/>
+            <feFuncG type="table" tableValues="1 0"/>
+            <feFuncB type="table" tableValues="1 0"/>
+          </feComponentTransfer>
+        </filter>
+    </defs>
+    <image filter="url(#f36)" xlink:href="girl.jpg" width="100%" height="100%"  preserveAspectRatio="xMidYMid meet"/>
+</svg>
+
+## feComponentTransfer
+{:.code15}
+    <feComponentTransfer>
+      <<mark>feFuncR</mark> <mark>type="gamma"</mark> 
+      amplitude="2" exponent="0.5" offset="0.2"/>
+    </feComponentTransfer>
+
+## feComponentTransfer
+
+<svg class="cover" width="570" height="400">
+    <defs>
+        <filter id="f37" >
+          <feComponentTransfer>
+            <feFuncR type="gamma" amplitude="2" exponent="0.5" offset="0.2"/>
+          </feComponentTransfer>
+        </filter>
+    </defs>
+    <image filter="url(#f37)" xlink:href="girl.jpg" width="100%" height="100%"  preserveAspectRatio="xMidYMid meet"/>
+</svg>
+
+
+## **feColorMatrix**
+
+## feColorMatrix
+{:.code14.codecenter.noheader}
+    
+    <<mark>feColorMatrix</mark> <mark>type="<mark>saturate</mark>"</mark> <mark>values="<mark>0</mark>"</mark> />
+
+<svg class="cover" width="570" height="400">
+  <defs>
+      <filter id="f60" >
+        <feColorMatrix type="saturate" values="0"/>
+      </filter>
+  </defs>
+  <image filter="url(#f60)" xlink:href="girl.jpg" width="100%" height="100%"  preserveAspectRatio="xMidYMid meet"/>
+</svg>
+
+## feColorMatrix
+{:.code14.codecenter.noheader}
+    
+    <<mark>feColorMatrix</mark> <mark>type="<mark>saturate</mark>"</mark> <mark>values="<mark>4</mark>"</mark> />
+
+<svg class="cover" width="570" height="400">
+  <defs>
+      <filter id="f61" >
+        <feColorMatrix type="saturate" values="4"/>
+      </filter>
+  </defs>
+  <image filter="url(#f61)" xlink:href="girl.jpg" width="100%" height="100%"  preserveAspectRatio="xMidYMid meet"/>
+</svg>
+
+## feColorMatrix
+{:.code14.codecenter.noheader}
+    
+    <<mark>feColorMatrix</mark> <mark>type="<mark>saturate</mark>"</mark> <mark>values="<mark>50</mark>"</mark> />
+
+<svg class="cover" width="570" height="400">
+  <defs>
+      <filter id="f62" >
+        <feColorMatrix type="saturate" values="50"/>
+      </filter>
+  </defs>
+  <image filter="url(#f62)" xlink:href="girl.jpg" width="100%" height="100%"  preserveAspectRatio="xMidYMid meet"/>
+</svg>
+
+
+
+## feColorMatrix
+{:.code13.codecenter.noheader}
+    
+    <<mark>feColorMatrix</mark> <mark>type="<mark>hueRotate</mark>"</mark> <mark>values="<mark>0</mark>"</mark> />
+
+<svg class="cover" width="570" height="400">
+  <defs>
+      <filter id="f70" >
+        <feColorMatrix type="hueRotate" values="0"/>
+      </filter>
+  </defs>
+  <image filter="url(#f70)" xlink:href="girl.jpg" width="100%" height="100%"  preserveAspectRatio="xMidYMid meet"/>
+</svg>
+
+## feColorMatrix
+{:.code13.codecenter.noheader}
+    
+    <<mark>feColorMatrix</mark> <mark>type="<mark>hueRotate</mark>"</mark> <mark>values="<mark>120</mark>"</mark> />
+
+<svg class="cover" width="570" height="400">
+  <defs>
+      <filter id="f71" >
+        <feColorMatrix type="hueRotate" values="120"/>
+      </filter>
+  </defs>
+  <image filter="url(#f71)" xlink:href="girl.jpg" width="100%" height="100%"  preserveAspectRatio="xMidYMid meet"/>
+</svg>
+
+## feColorMatrix
+{:.code13.codecenter.noheader}
+    
+    <<mark>feColorMatrix</mark> <mark>type="<mark>hueRotate</mark>"</mark> <mark>values="<mark>240</mark>"</mark> />
+
+<svg class="cover" width="570" height="400">
+  <defs>
+      <filter id="f72" >
+        <feColorMatrix type="hueRotate" values="240"/>
+      </filter>
+  </defs>
+  <image filter="url(#f72)" xlink:href="girl.jpg" width="100%" height="100%"  preserveAspectRatio="xMidYMid meet"/>
+</svg>
+
+## feColorMatrix
+{:.code13.codecenter.noheader}
+    
+    <<mark>feColorMatrix</mark> <mark>type="<mark>hueRotate</mark>"</mark> <mark>values="<mark>320</mark>"</mark> />
+
+<svg class="cover" width="570" height="400">
+  <defs>
+      <filter id="f73" >
+        <feColorMatrix type="hueRotate" values="320"/>
+      </filter>
+  </defs>
+  <image filter="url(#f73)" xlink:href="girl.jpg" width="100%" height="100%"  preserveAspectRatio="xMidYMid meet"/>
+</svg>
+
+
+## feColorMatrix
+{:.code13.codecenter.noheader}
+    
+    <<mark>feColorMatrix</mark> <mark>type="<mark>luminanceToAlpha</mark>"</mark> />
+
+<svg class="cover" width="570" height="400">
+  <defs>
+      <filter id="f74" >
+        <feColorMatrix type="luminanceToAlpha"/>
+      </filter>
+  </defs>
+  <image filter="url(#f74)" xlink:href="girl.jpg" width="100%" height="100%"  preserveAspectRatio="xMidYMid meet"/>
+</svg>
+
+## feColorMatrix
+{:.code10}
+
+    <feColorMatrix <mark>type="matrix"</mark> values="<mark><mark>0.343 0.669 0.119 0 0 0.249 0.626 0.130 0 0 0.172 0.334 0.111 0 0 0 0 0 1 0</mark></mark>"/>
+
+    <feColorMatrix <mark>type="matrix"</mark> values="<mark><mark>0.343</mark> <mark>0.669</mark> <mark>0.119</mark> <mark>0</mark> <mark>0</mark></mark> 
+                                          <mark><mark>0.249</mark> <mark>0.626</mark> <mark>0.130</mark> <mark>0</mark> <mark>0</mark></mark>
+                                          <mark><mark>0.172</mark> <mark>0.334</mark> <mark>0.111</mark> <mark>0</mark> <mark>0</mark></mark>
+                                          <mark><mark>0    </mark> <mark>0    </mark> <mark>0    </mark> <mark>1</mark> <mark>0</mark></mark> "/>
+
+## feColorMatrix
+{:.code16}
+
+
+    | R' |     | a00 a01 a02 a03 a04 |   | R |
+    | G' |     | a10 a11 a12 a13 a14 |   | G |
+    | B' |  =  | a20 a21 a22 a23 a24 | * | B |
+    | A' |     | a30 a31 a32 a33 a34 |   | A |
+    | 1  |     |  0   0   0   0   1  |   | 1 |
+
+
+## feColorMatrix
+{:.code11}
+
+<svg class="cover" width="570" height="400">
+  <defs>
+    <filter id="f75" >
+      <feColorMatrix type="matrix" values="0.343 0.669 0.119 0 0 0.249 0.626 0.130 0 0 0.172 0.334 0.111 0 0 0 0 0 1 0"/>
+    </filter>
+  </defs>
+  <image filter="url(#f75)" xlink:href="girl.jpg" width="100%" height="100%"  preserveAspectRatio="xMidYMid meet"/>
+</svg>
+
+
+## feColorMatrix
+{:.code11}
+
+<svg class="cover" width="570" height="400">
+  <defs>
+    <filter id="f77" >
+<feColorMatrix in="SourceGraphic" type="matrix" values="5 0 0 0 -0.2 
+                                                        0 1.2 0 0 -0.2 
+                                                        0 5 1.2 0 -0.2
+                                                        5 0 0 1 0"/>
+    </filter>
+  </defs>
+  <image filter="url(#f77)" xlink:href="girl.jpg" width="100%" height="100%"  preserveAspectRatio="xMidYMid meet"/>
+</svg>
+
+## feColorMatrix
+{:.code11}
+
+<svg class="cover" width="570" height="400">
+  <defs>
+    <filter id="f76" >
+<feColorMatrix in="SourceGraphic" type="matrix" values="1.2 0 0 0 -0.2 
+                                                              2 0 2 2 -0.2 
+                                                              2 2 1.2 0 -0.2
+                                                              2 0 0 1 0"/>
+    </filter>
+  </defs>
+  <image filter="url(#f76)" xlink:href="girl.jpg" width="100%" height="100%"  preserveAspectRatio="xMidYMid meet"/>
+</svg>
+
+
+
+
+## **feConvolveMatrix**
+
+
+## feConvolveMatrix
+{:.code16.codecenter}
+
+    <<mark>feConvolveMatrix</mark> <mark>order="<mark>3</mark>"</mark>
+    <mark>kernelMatrix="<mark>1 -1  1 -1 -1 -1 1 -1 1</mark>"</mark>/>
+
+     1    -1     1 
+    -1    -1    -1 
+    1    -1     1
+
+## Classic Duck Face
+{:.code10}
+
+<svg class="cover" width="570" height="400">
+  <defs>
+
+  </defs>
+  <image xlink:href="pictures/duck.jpg" width="100%" height="100%"  preserveAspectRatio="xMidYMid meet"/>
+</svg>
+
+## Fixed Duck Face
+{:.code10}
+
+<svg class="cover" width="570" height="400">
+  <defs>
+    <filter id="f81" >
+      <feConvolveMatrix order="3" kernelMatrix="1 -1  1 -1 -1 -1 1  -1 1"/>
+    </filter>
+  </defs>
+  <image filter="url(#f81)" xlink:href="pictures/duck.jpg" width="100%" height="100%"  preserveAspectRatio="xMidYMid meet"/>
+</svg>
+
+## feConvolveMatrix
+{:.code9.noheader.codecenter}
+
+    <feConvolveMatrix order="<mark>3</mark>" kernelMatrix="<mark>1 -1 1 -1 -0.1 -1 1 -1 1</mark>"/>
+
+<svg class="cover" width="570" height="400">
+  <defs>
+    <filter id="f82" >
+      <feConvolveMatrix order="3" kernelMatrix="1 -1 1 -1 -0.1 -1 1 -1 1"/>
+    </filter>
+  </defs>
+  <image filter="url(#f82)" xlink:href="pictures/duck.jpg" width="100%" height="100%"  preserveAspectRatio="xMidYMid meet"/>
+</svg>
+
+
+## feConvolveMatrix
+{:.code9.noheader.codecenter}
+
+    <feConvolveMatrix order="<mark>3</mark>" kernelMatrix="<mark>9 0 0 0 1 0 0 0 -9</mark>"/>
+
+<svg class="cover" width="570" height="400">
+  <defs>
+    <filter id="f84" >
+      <feConvolveMatrix order="3" kernelMatrix="9 0 0 0 1 0 0 0 -9"/>
+    </filter>
+  </defs>
+  <image filter="url(#f84)" xlink:href="pictures/duck.jpg" width="100%" height="100%"  preserveAspectRatio="xMidYMid meet"/>
+</svg>
+
+## feConvolveMatrix
+{:.code9.noheader.codecenter}
+
+    <feConvolveMatrix order="<mark>3</mark>" kernelMatrix="<mark>-1 -1 -1 -1 7 -1 -1 -1 -1</mark>"/>
+
+<svg class="cover" width="570" height="400">
+  <defs>
+    <filter id="f85" >
+      <feConvolveMatrix order="3" kernelMatrix="-1 -1 -1 -1 7 -1 -1 -1 -1"/>
+    </filter>
+  </defs>
+  <image filter="url(#f85)" xlink:href="pictures/duck.jpg" width="100%" height="100%"  preserveAspectRatio="xMidYMid meet"/>
+</svg>
+
+## feConvolveMatrix
+{:.code9.noheader}
+
+    <feConvolveMatrix order="<mark>5</mark>" 
+    kernelMatrix="<mark>1 1 1 1 1 1 -2 -2 -2 1 1 -2 0 -2 1 1 -2 -2 -2 1 1 1 1 1 1</mark>"/>
+
+<svg class="cover" width="570" height="400">
+  <defs>
+    <filter id="f86" >
+      <feConvolveMatrix order="5" kernelMatrix="1 1 1 1 1 1 -2 -2 -2 1 1  -2 .01 -2 1 1 -2 -2 -2 1 1 1 1 1 1"/>
+    </filter>
+  </defs>
+  <image filter="url(#f86)" xlink:href="pictures/duck.jpg" width="100%" height="100%"  preserveAspectRatio="xMidYMid meet"/>
+</svg>
+
+
+
+
+
+
+
+
+
+
 
 ## Возможности svg фильтров
 
