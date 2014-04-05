@@ -919,9 +919,12 @@ style: |
 ## **feComposite**
 
 ## feComposite
-{:.code9.center}
+{:.code17}
 
-
+    <feComposite 
+        <mark>in="<mark>source1</mark>"</mark> 
+        <mark>in2="<mark>source2</mark>"</mark>
+        <mark>operator="<mark>xor</mark>"</mark>/>
 
 ## feComposite
 {:.code9.noheader.center}
@@ -1036,9 +1039,16 @@ style: |
 
 ## **feBlend**
 
+## feBlend
+{:.code17}
 
-## feComposite
-{:.code9.noheader.center}
+    <feBlend 
+        <mark>in="<mark>source1</mark>"</mark> 
+        <mark>in2="<mark>source2</mark>"</mark>
+        <mark>mode="<mark>lighten</mark>"</mark>/>
+
+## Blend modes
+{:.code9.center}
 
 <div class="rowItem">
   <svg viewBox="0 0 250 250" class="cover" width="250" height="250">
@@ -1106,8 +1116,264 @@ style: |
 </div>
 
  
-----
+## **feTile**
 
+## feTile
+{:.code17.center}
+
+    <feTile <mark>in="<mark>source</mark>"</mark> />
+
+
+<svg viewBox="0 0 800 250" class="cover" width="800" height="250" style="width:800px; height:250px;">
+  <defs>
+    <filter id="fbTile" x="-100%" y="-100%" width="300%" height="300%"  >
+      <feImage id="fl" result="fl" x="0" y="0" width="100" height="100" xlink:href="img/img1.jpg" preserveAspectRatio="true"/>
+      <feTile in="fl"/>
+    </filter>
+  </defs>
+  <image filter="url(#fbTile)" xlink:href="img/img2.jpg" x="0" y="0" width="1000" height="1000"/>
+</svg>
+
+## Польза от feTile
+{:.code17.center}
+
+<svg class="cover" width="550" height="400">
+  <image xlink:href="img/obama.jpg" x="0" y="0" width="100%" height="100%"/>
+</svg>
+
+## Польза от feTile
+{:.code17.center}
+
+<svg class="cover" width="550" height="400">
+  <defs>
+    <filter id="fbTileEx" x="-100%" y="-100%" width="300%" height="300%"  >
+      <feGaussianBlur id="b1-0" result="blurOut-0" in="SourceGraphic" stdDeviation="19"/>
+      <feComposite id="c1-0" in="SourceGraphic" in2="blurOut-0" operator="arithmetic" k1="0" k2="3.000000" k3="-1.90000" k4="0"/>
+      <feColorMatrix result="sat-res" type="matrix" values=".343 .669 .119 0 0 .249 .626 .130 0 0 .172 .334 .111 0 0 .000 .000 .000 1 0" />
+      <feImage xlink:href="img/dot.jpg" x="1" y="1" width="3" height="3" result="texture-res"/>
+      <feTile in="texture-res" result="tile-res"/>       
+      <feBlend in="sat-res" in2="tile-res" mode="darken" />  
+    </filter>
+  </defs>
+  <image filter="url(#fbTileEx)" xlink:href="img/obama.jpg" x="0" y="0" width="100%" height="100%"/>
+</svg>
+
+## **feDisplacementMap**
+
+## feDisplacementMap
+{:.code17.center}
+
+<svg width="330" height="330">
+    <image id="resultImg"   preserveAspectRatio="xMidYMid slice" width="100%" height="100%"  xlink:href="img/tang.jpg"/>
+</svg>
+
+## feDisplacementMap
+{:.code17.center}
+
+<svg width="330" height="330">
+    <defs>
+
+      <filter id="dpmap1" x="0" y="0" width="100%" height="100%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse">
+
+       <!-- rotation displacement map-->
+
+       <feImage result="map" xlink:href="img/rotate20.png"/>
+
+        <!--red-->
+
+        <feComponentTransfer in="SourceGraphic" result="redOut">
+           <feFuncR type="linear" slope="1"/>
+           <feFuncG type="linear" slope="0"/>
+           <feFuncB type="linear" slope="0"/>
+        </feComponentTransfer>
+        <feDisplacementMap in="redOut" in2="map" result="redRotateOut" scale="60" xChannelSelector="R" yChannelSelector="G"/>
+
+        <!--green-->
+
+        <feComponentTransfer in="SourceGraphic" result="greenOut">
+           <feFuncR type="linear" slope="0"/>
+           <feFuncG type="linear" slope="1"/>
+           <feFuncB type="linear" slope="0"/>
+        </feComponentTransfer>
+        <feDisplacementMap in="greenOut" in2="map" result="greenRotateOut" scale="0" xChannelSelector="R" yChannelSelector="G"/>
+
+        <!--blue-->
+
+        <feComponentTransfer in="SourceGraphic" result="blueOut">
+           <feFuncR type="linear" slope="0"/>
+           <feFuncG type="linear" slope="0"/>
+           <feFuncB type="linear" slope="1"/>
+        </feComponentTransfer>
+        <feDisplacementMap in="blueOut" in2="map" result="blueRotateOut" scale="-60" xChannelSelector="R" yChannelSelector="G"/>
+
+        <!--merge-->
+
+        <feBlend in="greenRotateOut" in2="redRotateOut" result="redGreenMergeOut" mode="screen" />
+        <feBlend in="redGreenMergeOut" in2="blueRotateOut" mode="screen" />
+
+      </filter>
+    </defs>
+    <image  filter="url(#dpmap1)" id="resultImg"   preserveAspectRatio="xMidYMid slice" width="100%" height="100%"  xlink:href="img/tang.jpg"/>
+</svg>
+
+## Красный канал. 20 градусов
+{:.code10.center}
+
+<svg width="330" height="330">
+    <defs>
+
+      <filter id="dpmap2" x="0" y="0" width="100%" height="100%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse">
+
+       <!-- rotation displacement map-->
+
+       <feImage result="map" xlink:href="img/rotate20.png"/>
+
+        <!--red-->
+
+        <feComponentTransfer in="SourceGraphic" result="redOut">
+           <feFuncR type="linear" slope="1"/>
+           <feFuncG type="linear" slope="0"/>
+           <feFuncB type="linear" slope="0"/>
+        </feComponentTransfer>
+        <feDisplacementMap in="redOut" in2="map" result="redRotateOut" scale="60" xChannelSelector="R" yChannelSelector="G"/>
+
+       
+
+      </filter>
+    </defs>
+    <image  filter="url(#dpmap2)" id="resultImg"   preserveAspectRatio="xMidYMid slice" width="100%" height="100%"  xlink:href="img/tang.jpg"/>
+</svg>
+
+## Cиний канал. -20 градусов
+{:.code10.center}
+
+<svg width="330" height="330">
+    <defs>
+
+      <filter id="dpmap3" x="0" y="0" width="100%" height="100%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse">
+
+       <!-- rotation displacement map-->
+
+       <feImage result="map" xlink:href="img/rotate20.png"/>
+
+        <!--blue-->
+
+        <feComponentTransfer in="SourceGraphic" result="blueOut">
+           <feFuncR type="linear" slope="0"/>
+           <feFuncG type="linear" slope="0"/>
+           <feFuncB type="linear" slope="1"/>
+        </feComponentTransfer>
+        <feDisplacementMap in="blueOut" in2="map" result="blueRotateOut" scale="-60" xChannelSelector="R" yChannelSelector="G"/>
+
+      </filter>
+    </defs>
+    <image  filter="url(#dpmap3)" id="resultImg"   preserveAspectRatio="xMidYMid slice" width="100%" height="100%"  xlink:href="img/tang.jpg"/>
+</svg>
+
+
+## + Неподвижный зеленый
+{:.code17.center}
+
+<svg width="330" height="330">
+    <defs>
+
+      <filter id="dpmap4" x="0" y="0" width="100%" height="100%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse">
+
+       <!-- rotation displacement map-->
+
+       <feImage result="map" xlink:href="img/rotate20.png"/>
+
+        <!--red-->
+
+        <feComponentTransfer in="SourceGraphic" result="redOut">
+           <feFuncR type="linear" slope="1"/>
+           <feFuncG type="linear" slope="0"/>
+           <feFuncB type="linear" slope="0"/>
+        </feComponentTransfer>
+        <feDisplacementMap in="redOut" in2="map" result="redRotateOut" scale="60" xChannelSelector="R" yChannelSelector="G"/>
+
+        <!--green-->
+
+        <feComponentTransfer in="SourceGraphic" result="greenOut">
+           <feFuncR type="linear" slope="0"/>
+           <feFuncG type="linear" slope="1"/>
+           <feFuncB type="linear" slope="0"/>
+        </feComponentTransfer>
+        <feDisplacementMap in="greenOut" in2="map" result="greenRotateOut" scale="0" xChannelSelector="R" yChannelSelector="G"/>
+
+        <!--blue-->
+
+        <feComponentTransfer in="SourceGraphic" result="blueOut">
+           <feFuncR type="linear" slope="0"/>
+           <feFuncG type="linear" slope="0"/>
+           <feFuncB type="linear" slope="1"/>
+        </feComponentTransfer>
+        <feDisplacementMap in="blueOut" in2="map" result="blueRotateOut" scale="-60" xChannelSelector="R" yChannelSelector="G"/>
+
+        <!--merge-->
+
+        <feBlend in="greenRotateOut" in2="redRotateOut" result="redGreenMergeOut" mode="screen" />
+        <feBlend in="redGreenMergeOut" in2="blueRotateOut" mode="screen" />
+
+      </filter>
+    </defs>
+    <image  filter="url(#dpmap4)" id="resultImg"   preserveAspectRatio="xMidYMid slice" width="100%" height="100%"  xlink:href="img/tang.jpg"/>
+</svg>
+
+
+
+
+
+
+
+## Happy face
+{:.code17.center}
+
+<svg width="330" height="330">
+    <defs>
+
+      <filter id="dpmap4" x="0" y="0" width="100%" height="100%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse">
+
+       <!-- rotation displacement map-->
+
+       <feImage result="map" xlink:href="img/rotate20.png"/>
+
+        <!--red-->
+
+        <feComponentTransfer in="SourceGraphic" result="redOut">
+           <feFuncR type="linear" slope="1"/>
+           <feFuncG type="linear" slope="0"/>
+           <feFuncB type="linear" slope="0"/>
+        </feComponentTransfer>
+        <feDisplacementMap in="redOut" in2="map" result="redRotateOut" scale="60" xChannelSelector="R" yChannelSelector="G"/>
+
+        <!--green-->
+
+        <feComponentTransfer in="SourceGraphic" result="greenOut">
+           <feFuncR type="linear" slope="0"/>
+           <feFuncG type="linear" slope="1"/>
+           <feFuncB type="linear" slope="0"/>
+        </feComponentTransfer>
+        <feDisplacementMap in="greenOut" in2="map" result="greenRotateOut" scale="0" xChannelSelector="R" yChannelSelector="G"/>
+
+        <!--blue-->
+
+        <feComponentTransfer in="SourceGraphic" result="blueOut">
+           <feFuncR type="linear" slope="0"/>
+           <feFuncG type="linear" slope="0"/>
+           <feFuncB type="linear" slope="1"/>
+        </feComponentTransfer>
+        <feDisplacementMap in="blueOut" in2="map" result="blueRotateOut" scale="-60" xChannelSelector="R" yChannelSelector="G"/>
+
+        <!--merge-->
+
+        <feBlend in="greenRotateOut" in2="redRotateOut" result="redGreenMergeOut" mode="screen" />
+        <feBlend in="redGreenMergeOut" in2="blueRotateOut" mode="screen" />
+
+      </filter>
+    </defs>
+    <image  filter="url(#dpmap4)" id="resultImg"   preserveAspectRatio="xMidYMid slice" width="100%" height="100%"  xlink:href="img/tang.jpg"/>
+</svg>
 
 
 

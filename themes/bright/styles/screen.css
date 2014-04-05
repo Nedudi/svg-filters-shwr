@@ -228,6 +228,7 @@ svg{
 
 
 .rowItem{
+  font-family: "isocpeurregular";
   display: inline-block;
   vertical-align: top;
   width: 160px;
@@ -236,7 +237,7 @@ svg{
 }
 
 .rowItem label{
-  font-size: 20px;
+  font-size: 30px;
   text-align: center;
   display: block;
   width: 100%;
