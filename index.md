@@ -916,11 +916,197 @@ style: |
 </svg>
 
 
+## **feComposite**
+
+## feComposite
+{:.code9.center}
 
 
 
+## feComposite
+{:.code9.noheader.center}
+
+<div class="rowItem">
+  <svg viewBox="0 0 250 250" class="cover" width="250" height="250">
+    <defs>
+      <filter id="fcOver" x="-100%" y="-100%" width="300%" height="300%"  filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse">
+        <feImage id="fl" result="fl" x="50" y="50" width="200" height="200" xlink:href="img/img1.jpg" preserveAspectRatio="true"/>
+        <feComposite in="SourceGraphic" in2="fl" operator="over"/>
+      </filter>
+    </defs>
+    <image filter="url(#fcOver)" xlink:href="img/img2.jpg" x="0" y="0" width="200" height="200"/>
+  </svg>
+  <label>over</label>
+</div>
+
+<div class="rowItem">
+  <svg viewBox="0 0 250 250" class="cover" width="250" height="250">
+    <defs>
+      <filter id="fcIn" x="-100%" y="-100%" width="300%" height="300%"  filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse">
+        <feImage id="fl" result="fl" x="50" y="50" width="200" height="200" xlink:href="img/img1.jpg" preserveAspectRatio="true"/>
+        <feComposite in="SourceGraphic" in2="fl" operator="in"/>
+      </filter>
+    </defs>
+    <image filter="url(#fcIn)" xlink:href="img/img2.jpg" x="0" y="0" width="200" height="200"/>
+  </svg>
+  <label>in</label>
+</div>
+
+<div class="rowItem">
+  <svg viewBox="0 0 250 250" class="cover" width="250" height="250">
+    <defs>
+      <filter id="fcOut" x="-100%" y="-100%" width="300%" height="300%"  filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse">
+        <feImage id="fl" result="fl" x="50" y="50" width="200" height="200" xlink:href="img/img1.jpg" preserveAspectRatio="true"/>
+        <feComposite in="SourceGraphic" in2="fl" operator="out"/>
+      </filter>
+    </defs>
+    <image filter="url(#fcOut)" xlink:href="img/img2.jpg" x="0" y="0" width="200" height="200"/>
+  </svg>
+  <label>out</label>
+</div>
+
+<div class="rowItem">
+  <svg viewBox="0 0 250 250" class="cover" width="250" height="250">
+    <defs>
+      <filter id="fcAtop" x="-100%" y="-100%" width="300%" height="300%"  filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse">
+        <feImage id="fl" result="fl" x="50" y="50" width="200" height="200" xlink:href="img/img1.jpg" preserveAspectRatio="true"/>
+        <feComposite in="SourceGraphic" in2="fl" operator="atop"/>
+      </filter>
+    </defs>
+    <image filter="url(#fcAtop)" xlink:href="img/img2.jpg" x="0" y="0" width="200" height="200"/>
+  </svg>
+  <label>atop</label>
+</div>
 
 
+<div class="rowItem">
+  <svg viewBox="0 0 250 250" class="cover" width="250" height="250">
+    <defs>
+      <filter id="fcXor" x="-100%" y="-100%" width="300%" height="300%"  filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse">
+        <feImage id="fl" result="fl" x="50" y="50" width="200" height="200" xlink:href="img/img1.jpg" preserveAspectRatio="true"/>
+        <feComposite in="SourceGraphic" in2="fl" operator="xor"/>
+      </filter>
+    </defs>
+    <image filter="url(#fcXor)" xlink:href="img/img2.jpg" x="0" y="0" width="200" height="200"/>
+  </svg>
+  <label>xor</label>
+</div>
+
+
+<div class="rowItem">
+  <svg viewBox="0 0 250 250" class="cover" width="250" height="250">
+    <defs>
+      <filter id="fcArithmetic" x="-100%" y="-100%" width="300%" height="300%"  filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse">
+        <feImage id="fl" result="fl" x="50" y="50" width="200" height="200" xlink:href="img/img1.jpg" preserveAspectRatio="true"/>
+        <feComposite in="SourceGraphic" in2="fl" operator="arithmetic" k1="0" k2="1" k3="-1" k4="1"/>
+      </filter>
+    </defs>
+    <image filter="url(#fcArithmetic)" xlink:href="img/img2.jpg" x="0" y="0" width="200" height="200"/>
+  </svg>
+  <label>arithmetic<br><span>k1="0" k2="1" k3="-1" k4="1"</span></label>
+</div>
+
+
+<div class="rowItem">
+  <svg viewBox="0 0 250 250" class="cover" width="250" height="250">
+    <defs>
+      <filter id="fcArithmetic1" x="-100%" y="-100%" width="300%" height="300%"  filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse">
+        <feImage id="fl" result="fl" x="50" y="50" width="200" height="200" xlink:href="img/img1.jpg" preserveAspectRatio="true"/>
+        <feComposite in="SourceGraphic" in2="fl" operator="arithmetic" k1=".5" k2=".5" k3=".5" k4=".5"/>
+      </filter>
+    </defs>
+    <image filter="url(#fcArithmetic1)" xlink:href="img/img2.jpg" x="0" y="0" width="200" height="200"/>
+  </svg>
+  <label>arithmetic<br><span>k1=".5" k2=".5" k3=".5" k4=".5"</span></label>
+</div>
+
+<div class="rowItem">
+  <svg viewBox="0 0 250 250" class="cover" width="250" height="250">
+    <defs>
+      <filter id="fcArithmetic2" x="-100%" y="-100%" width="300%" height="300%"  filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse">
+        <feImage id="fl" result="fl" x="50" y="50" width="200" height="200" xlink:href="img/img1.jpg" preserveAspectRatio="true"/>
+        <feComposite in="SourceGraphic" in2="fl" operator="arithmetic" k1="0" k2="1" k3="1" k4="0"/>
+      </filter>
+    </defs>
+    <image filter="url(#fcArithmetic2)" xlink:href="img/img2.jpg" x="0" y="0" width="200" height="200"/>
+  </svg>
+  <label>arithmetic<br><span>k1="0" k2="1" k3="1" k4="0"</span></label>
+</div>
+
+
+## **feBlend**
+
+
+## feComposite
+{:.code9.noheader.center}
+
+<div class="rowItem">
+  <svg viewBox="0 0 250 250" class="cover" width="250" height="250">
+    <defs>
+      <filter id="fbNormal" x="-100%" y="-100%" width="300%" height="300%"  filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse">
+        <feImage id="fl" result="fl" x="0" y="0" width="250" height="250" xlink:href="img/img1.jpg" preserveAspectRatio="true"/>
+        <feBlend in="SourceGraphic" in2="fl" mode="normal"/>
+      </filter>
+    </defs>
+    <image filter="url(#fbNormal)" xlink:href="img/img2.jpg" x="0" y="0" width="250" height="250"/>
+  </svg>
+  <label>normal</label>
+</div>
+
+<div class="rowItem">
+  <svg viewBox="0 0 250 250" class="cover" width="250" height="250">
+    <defs>
+      <filter id="fbScreen" x="-100%" y="-100%" width="300%" height="300%"  filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse">
+        <feImage id="fl" result="fl" x="0" y="0" width="250" height="250" xlink:href="img/img1.jpg" preserveAspectRatio="true"/>
+        <feBlend in="SourceGraphic" in2="fl" mode="screen"/>
+      </filter>
+    </defs>
+    <image filter="url(#fbScreen)" xlink:href="img/img2.jpg" x="0" y="0" width="250" height="250"/>
+  </svg>
+  <label>screen</label>
+</div>
+
+<div class="rowItem">
+  <svg viewBox="0 0 250 250" class="cover" width="250" height="250">
+    <defs>
+      <filter id="fbMultiply" x="-100%" y="-100%" width="300%" height="300%"  filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse">
+        <feImage id="fl" result="fl" x="0" y="0" width="250" height="250" xlink:href="img/img1.jpg" preserveAspectRatio="true"/>
+        <feBlend in="SourceGraphic" in2="fl" mode="multiply"/>
+      </filter>
+    </defs>
+    <image filter="url(#fbMultiply)" xlink:href="img/img2.jpg" x="0" y="0" width="250" height="250"/>
+  </svg>
+  <label>multiply</label>
+</div>
+
+<div class="rowItem">
+  <svg viewBox="0 0 250 250" class="cover" width="250" height="250">
+    <defs>
+      <filter id="fbLighten" x="-100%" y="-100%" width="300%" height="300%"  filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse">
+        <feImage id="fl" result="fl" x="0" y="0" width="250" height="250" xlink:href="img/img1.jpg" preserveAspectRatio="true"/>
+        <feBlend in="SourceGraphic" in2="fl" mode="lighten"/>
+      </filter>
+    </defs>
+    <image filter="url(#fbLighten)" xlink:href="img/img2.jpg" x="0" y="0" width="250" height="250"/>
+  </svg>
+  <label>lighten</label>
+</div>
+
+<div class="rowItem">
+  <svg viewBox="0 0 250 250" class="cover" width="250" height="250">
+    <defs>
+      <filter id="fbDarken" x="-100%" y="-100%" width="300%" height="300%"  filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse">
+        <feImage id="fl" result="fl" x="0" y="0" width="250" height="250" xlink:href="img/img1.jpg" preserveAspectRatio="true"/>
+        <feBlend in="SourceGraphic" in2="fl" mode="darken"/>
+      </filter>
+    </defs>
+    <image filter="url(#fbDarken)" xlink:href="img/img2.jpg" x="0" y="0" width="250" height="250"/>
+  </svg>
+  <label>darken</label>
+</div>
+
+ 
+----
 
 
 

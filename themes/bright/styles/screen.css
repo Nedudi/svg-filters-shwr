@@ -221,3 +221,40 @@ svg{
   left: 0;
   z-index: -1;
 }
+
+.center{
+  text-align: center;
+}
+
+
+.rowItem{
+  display: inline-block;
+  vertical-align: top;
+  width: 160px;
+  margin: 20px 10px;
+
+}
+
+.rowItem label{
+  font-size: 20px;
+  text-align: center;
+  display: block;
+  width: 100%;
+  color: #2980b9;
+  line-height: 50px;
+} 
+
+.rowItem label span{
+  font-size: 10px;
+  display: inline-block;
+  line-height: 10px;
+  vertical-align: top;
+} 
+
+.rowItem svg{
+  width: 160px;
+  height: 160px;
+  background: #1abc9c;
+  border: 2px solid #1abc9c;
+ /* border:2px solid rgb(100,100,100);*/
+}
