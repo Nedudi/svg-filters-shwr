@@ -90,10 +90,15 @@ code {
 }*/
 
 .slide h2{
-    font-family: "isocpeurregular" !important;
+    font-family: "isocpeurregular";
     color:#3498db;
     font-size: 60px;
 }
+
+.slide.shout h2 {
+  top: 44%;
+}
+
 
 .slide ol, .slide ul {
     margin: 0 0 48px 50px;
@@ -106,13 +111,13 @@ section img{
 }
 
 .slide>div {
-    position: absolute;
-    top: 0;
-    left: 0;
-    overflow: hidden;
-    padding: 50px;
-    width: 924px;
-    height: 640px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  padding: 50px;
+  width: 924px;
+  height: 640px;
 }
 
 section{
@@ -131,4 +136,81 @@ section{
   border-radius:0;
   background:#e67e22;
   color:white;
+}
+
+h2{
+  text-align: center;
+}
+
+.slide#Cover h2 {
+  font-size: 139px;
+  padding: 0;
+  color: #3498db;
+  margin: 0;
+  font-family: "bebas_neue_cyrillicregular", Arial;
+  text-align: left;
+}
+
+#hipstagirl h2{
+  font-size: 100px;
+  padding: 0;
+  color: #3498db;
+  margin-top: 350px;
+  font-family: "bebas_neue_cyrillicregular", Arial;
+  text-align: center;
+  text-shadow:  0 0 10px rgba(0,0,0,0.5);
+
+}
+
+#Picture h2,
+#hipstagirl h2 {
+  color:#FFF;
+}
+
+
+#SeeMore h2 {
+  font-size:100px
+}
+#SeeMore img {
+  width:0.72em;
+  height:0.72em;
+}
+
+svg{
+  display: block;
+  margin: 0 auto;
+}
+
+.slide pre code {
+  display: block;
+  padding: 0;
+  background: 0 0;
+  white-space: pre-wrap;
+  line-height: 1.8;
+}
+
+.slide:after {
+  right: 45px;
+  bottom: 45px;
+  left: auto;
+}
+
+.code11 pre{font-size: 1.1em;}
+.code12 pre{font-size: 1.2em;}
+.code13 pre{font-size: 1.3em;}
+.code14 pre{font-size: 1.4em;}
+.code15 pre{font-size: 1.5em;}
+.code16 pre{font-size: 1.6em;}
+.code17 pre{font-size: 1.7em;}
+
+.slide.cover img, 
+.slide.cover svg, 
+.slide.cover video, 
+.slide.cover object, 
+.slide.cover canvas, 
+.slide.cover iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
 }
