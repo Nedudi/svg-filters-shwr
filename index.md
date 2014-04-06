@@ -1323,59 +1323,104 @@ style: |
 
 
 
+## Happy face
+{:.code17.center}
 
-
+<svg width="330" height="330">
+    <image id="resultImg" width="100%" height="100%"  xlink:href="img/happyface.png"/>
+</svg>
 
 ## Happy face
 {:.code17.center}
 
 <svg width="330" height="330">
     <defs>
-
-      <filter id="dpmap4" x="0" y="0" width="100%" height="100%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse">
-
-       <!-- rotation displacement map-->
-
-       <feImage result="map" xlink:href="img/rotate20.png"/>
-
-        <!--red-->
-
-        <feComponentTransfer in="SourceGraphic" result="redOut">
-           <feFuncR type="linear" slope="1"/>
-           <feFuncG type="linear" slope="0"/>
-           <feFuncB type="linear" slope="0"/>
-        </feComponentTransfer>
-        <feDisplacementMap in="redOut" in2="map" result="redRotateOut" scale="60" xChannelSelector="R" yChannelSelector="G"/>
-
-        <!--green-->
-
-        <feComponentTransfer in="SourceGraphic" result="greenOut">
-           <feFuncR type="linear" slope="0"/>
-           <feFuncG type="linear" slope="1"/>
-           <feFuncB type="linear" slope="0"/>
-        </feComponentTransfer>
-        <feDisplacementMap in="greenOut" in2="map" result="greenRotateOut" scale="0" xChannelSelector="R" yChannelSelector="G"/>
-
-        <!--blue-->
-
-        <feComponentTransfer in="SourceGraphic" result="blueOut">
-           <feFuncR type="linear" slope="0"/>
-           <feFuncG type="linear" slope="0"/>
-           <feFuncB type="linear" slope="1"/>
-        </feComponentTransfer>
-        <feDisplacementMap in="blueOut" in2="map" result="blueRotateOut" scale="-60" xChannelSelector="R" yChannelSelector="G"/>
-
-        <!--merge-->
-
-        <feBlend in="greenRotateOut" in2="redRotateOut" result="redGreenMergeOut" mode="screen" />
-        <feBlend in="redGreenMergeOut" in2="blueRotateOut" mode="screen" />
-
+      <filter id="dpmap7" x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse">
+        <feImage   result="map" xlink:href="img/sphere.png"/>
+        <feOffset in="map" result="map1" dx="20" dy="60"/>
+        <feDisplacementMap in="SourceGraphic" in2="map1" result="res1" scale="190" xChannelSelector="R" yChannelSelector="G"/>
       </filter>
     </defs>
-    <image  filter="url(#dpmap4)" id="resultImg"   preserveAspectRatio="xMidYMid slice" width="100%" height="100%"  xlink:href="img/tang.jpg"/>
+    <image  filter="url(#dpmap7)"  id="resultImg" width="100%" height="100%"  xlink:href="img/happyface.png"/>
 </svg>
 
+## Happy face
+{:.code17.center}
 
+<svg width="330" height="330">
+    <defs>
+      <filter id="dpmap8" x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse">
+        <feImage result="map" xlink:href="img/sphere.png"/>
+        <feOffset in="map" result="map1" dx="-10" dy="-45"/>
+        <feDisplacementMap in="SourceGraphic" in2="map1" result="res1" scale="180" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+    </defs>
+    <image  filter="url(#dpmap8)"  id="resultImg" width="100%" height="100%"  xlink:href="img/happyface.png"/>
+</svg>
+
+## Happy face
+{:.code17.center}
+
+<svg width="330" height="330">
+    <defs>
+      <filter id="dpmap71" x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse">
+        <feImage   result="map" xlink:href="img/sphere.png"/>
+        <feOffset in="map" result="map1" dx="20" dy="60"/>
+        <feDisplacementMap id="zzz0" in="SourceGraphic" in2="map1" result="res1" scale="190" xChannelSelector="R" yChannelSelector="G">        
+          <animate xlink:href="#zzz0" xmlns="http://www.w3.org/2000/svg" attributeName="scale" values="0;120;0" dur="2s" repeatCount="indefinite"/>  
+        </feDisplacementMap>
+      </filter>
+    </defs>
+    <image  filter="url(#dpmap71)"  id="resultImg" width="100%" height="100%"  xlink:href="img/happyface.png"/>
+</svg>
+
+## Happy face
+{:.code17.center}
+
+<svg width="330" height="330">
+    <defs>
+      <filter id="dpmap85" x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse">
+        <feImage result="map" xlink:href="img/sphere.png"/>
+        <feOffset in="map" result="map1" dx="-10" dy="-45"/>
+        <feDisplacementMap id="zzz1" in="SourceGraphic" in2="map1" result="res1" scale="0" xChannelSelector="R" yChannelSelector="G">
+          <animate xlink:href="#zzz1" xmlns="http://www.w3.org/2000/svg" attributeName="scale" values="0;180;0" dur="2s" repeatCount="indefinite"/>  
+        </feDisplacementMap>
+                   
+      </filter>
+    </defs>
+    <image  filter="url(#dpmap85)"  id="resultImg" width="100%" height="100%"  xlink:href="img/happyface.png"/>
+</svg>
+
+## Che
+{:.code17.center}
+
+<svg width="480" height="320" viewBox="0 0 320 240" 
+  xmlns="http://www.w3.org/2000/svg" version="1.1"
+  xmlns:xlink="http://www.w3.org/1999/xlink">
+   
+  <filter id="fche"  
+  filterUnits="userSpaceOnUse"
+  x="0" y="0" width="320" height="240">
+  <feImage id="fi1" xlink:href="img/test01.png"
+  x="0" y="0" width="320" height="240" result="i1" />
+  <feImage id="fi2" xlink:href="img/che.png"
+  x="0" y="0" width="320" height="240" result="i2" />
+
+
+  <feDisplacementMap id="fb" 
+  in="i1" in2="i2"
+  scale="0"
+  xChannelSelector="R" 
+  yChannelSelector="B"
+  x="0" y="0" width="500" height="500" />
+
+
+  <animate xlink:href="#fb" attributeName="scale" begin="0" calcMode="linear" values="500;-500;500" dur="10s" repeatCount="indefinite" />
+  
+  </filter>
+   </defs>
+  <g filter="url(#fche)" />
+</svg>
 
 ## Возможности svg фильтров
 
