@@ -95,6 +95,23 @@ code {
     font-size: 60px;
 }
 
+.slide#hhh1{background-color: #1abc9c;}
+.slide#hhh2{background-color: #e74c3c;}
+.slide#hhh3{background-color: #3498db;}
+.slide#hhh4{background-color: #9b59b6;}
+.slide#hhh5{background-color: #f39c12;}
+.slide#hhh6{background-color: #27ae60;}
+
+.slide#hhh1 h2,
+.slide#hhh2 h2,
+.slide#hhh3 h2,
+.slide#hhh4 h2,
+.slide#hhh5 h2,
+.slide#hhh6 h2{
+  font-family: "bebas_neue_cyrillicregular", Arial;
+  font-size: 200px;
+}
+
 .slide.shout h2 {
   top: 44%;
 }
@@ -142,6 +159,8 @@ h2{
   text-align: center;
 }
 
+
+
 .slide#Cover h2 {
   font-size: 139px;
   padding: 0;
@@ -151,20 +170,31 @@ h2{
   text-align: left;
 }
 
-#hipstagirl h2{
+#hipstagirl h2,
+#allgood h2{
   font-size: 100px;
   padding: 0;
   color: #3498db;
-  margin-top: 350px;
+  
   font-family: "bebas_neue_cyrillicregular", Arial;
   text-align: center;
   text-shadow:  0 0 10px rgba(0,0,0,0.5);
-
+  color:#FFF;
 }
 
+#hipstagirl h2{
+  margin-top: 350px;
+}
+
+#allgood h2{
+   margin-top: 0px;
+}
+
+
 #Picture h2,
-#hipstagirl h2 {
-  color:#FFF;
+#hipstagirl h2,
+#allgood h2 {
+  color: white;
 }
 
 

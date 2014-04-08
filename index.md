@@ -39,10 +39,88 @@ style: |
 </ul>
 
 ## Фильтрация в веб <br>несколько лет назад
+
 <ol>
   <li>Flash</li>
-  <li class="next"><span>Отправляем на сервер,</span> <br/><span  class="next">там фильтруем</span>, <br/><span class="next">возвращаем обратно на клиент</span><br/> <span  class="next">и все это время ждем, ждем, ждем...</span></li>
+  <li class="next"><span>Отправляем на сервер,</span> <br/><span  class="next">там фильтруем, </span><br/><span class="next">возвращаем обратно на клиент</span><br/> <span  class="next">и все это время <span  class="next">ждем,</span> <span  class="next">ждем,</span> <span  class="next">ждем...</span></span></li>
 </ol>
+
+
+## Все меняется к лучшему
+{:.cover #allgood}
+![](img/life.jpg)
+
+
+## Способы фильтрации на клиенте сегодня и в ближайшем будущем:
+
+1. …canvas
+2. …webgl
+3. …svg filters
+4. …svg filters for html
+5. …css filter effects
+6. …css shaders
+
+## **Canvas**
+{:.cover #hhh1}
+
+
+## Canvas data
+{:.code13.noheader}
+
+    var canvas = document.createElement('canvas');
+    var context = canvas.getContext('2d');
+    context.drawImage(img);
+    var pixels = context.getImageData(0, 0, w, h).data;
+
+<img style="height:300px; width: auto" src="img/canvaspixels.png" > 
+
+
+## Возможно, вам не нужно изобретать свой велосипед
+{:.code13}
+
+<img style="width: 600px; margin:0 auto; display: block" src="img/velosiped.gif" >
+
+---
+
+<img style="height: 500px; width: auto;margin:0 auto; display: block" src="img/vintagejs.png" >
+
+## vintageJS
+{:.code12}
+
+    $(img).vintage({
+      <mark>contrast:<mark>32</mark>,</mark>
+      <mark>lighten:<mark>0.4</mark>,</mark>
+      <mark>noise: <mark>20</mark>,</mark>
+      <mark>desaturate: <mark>0.05</mark></mark>
+    });
+
+---
+
+<img style="height: 500px; width: auto;margin:0 auto; display: block" src="img/camanjs.png" >
+
+## camanJS
+{:.code12}
+
+    Caman("images/example-image.jpg", "#example-canvas", function () {
+      this
+        <mark>.saturation(<mark>20</mark>)</mark>
+        <mark>.gamma(<mark>1.4</mark>)</mark>
+        <mark>.vignette(<mark>300, 60</mark>)</mark>
+        <mark>.render();</mark>
+    });
+
+
+
+## **WebGL**
+{:.cover #hhh2}
+
+## webgl stuff here 
+
+
+
+
+## **SVG filters**
+{:.cover #hhh3}
 
 ## Нарисуем круг
 
@@ -193,285 +271,6 @@ style: |
     </filter>
   </defs>
   <image filter="url(#f2)" xlink:href="girl.jpg" width="100%" height="100%" />
-</svg>
-
-## Немного хипстерства<br> для примера
-{:.cover #hipstagirl}
-![](pictures/hipstagirl.jpg)
-
-## Вновь девушка
-
-<svg width="570" height="400">
-    <image xlink:href="girl.jpg" width="100%" height="100%"  preserveAspectRatio="xMidYMid meet"/>
-</svg>
-
-
-## 1) Подчеркнем темные области
-
-<svg width="570" height="400">
-    <defs>
-        <filter id="f5">           
-            <!--Soften-Sharpen-->
-            <feGaussianBlur id="b1-0" result="blurOut-0" in="SourceGraphic" stdDeviation="50"/>
-            <feComposite id="c1-0" result="dynResult-0" in="SourceGraphic" in2="blurOut-0" operator="arithmetic" k1="0" k2="1.600000" k3="-0.600000" k4="0"/>
-        </filter>
-    </defs>
-    <image filter="url(#f5)" xlink:href="girl.jpg" width="100%" height="100%"  preserveAspectRatio="xMidYMid meet"/>
-</svg>
-
-## 2) Blur по маске
-
-<svg width="570" height="400">
-    <defs>
-        <filter id="f6" >
-            
-            <!--Soften-Sharpen-->
-            <feGaussianBlur id="b1-0" result="blurOut-0" in="SourceGraphic" stdDeviation="50"/>
-            <feComposite id="c1-0" result="dynResult-0" in="SourceGraphic" in2="blurOut-0" operator="arithmetic" k1="0" k2="1.600000" k3="-0.600000" k4="0"/>
-
-            <!-- Blur-all-except face -->
-            <feDiffuseLighting result="diffOut" diffuseConstant="1" lighting-color="white">
-              <feSpotLight id="spotlight" x="0" y="0" z="300" pointsAtX="100" pointsAtY="150" pointsAtZ="80" specularExponent="2" limitingConeAngle="22"></feSpotLight>
-            </feDiffuseLighting>
-            <feColorMatrix in="diffOut" result="alphaMap" type="luminanceToAlpha"></feColorMatrix>
-            <feComponentTransfer in="alphaMap" result="invertlight">
-                <feFuncA type="table" tableValues="1 0 0 0 0"></feFuncA>
-            </feComponentTransfer>
-            <feGaussianBlur in="invertlight" result="featherspot" stdDeviation="10"></feGaussianBlur>
-            <feComposite operator="xor" result="infocus" in2="dynResult-0" in="featherspot"></feComposite>     
-            <feGaussianBlur in="SourceGraphic" result="outfocus" stdDeviation="7"></feGaussianBlur>
-            <feComposite operator="over" in="infocus" in2="outfocus"></feComposite>     
-        </filter>
-    </defs>
-    <image filter="url(#f6)" xlink:href="girl.jpg" width="100%" height="100%"  preserveAspectRatio="xMidYMid meet"/>
-</svg>
-
-## 3) Уменьшим цветовую насыщенность
-
-<svg width="570" height="400">
-    <defs>
-        <filter id="f7" >
-            
-            <!--Soften-Sharpen-->
-            <feGaussianBlur id="b1-0" result="blurOut-0" in="SourceGraphic" stdDeviation="50"/>
-            <feComposite id="c1-0" result="dynResult-0" in="SourceGraphic" in2="blurOut-0" operator="arithmetic" k1="0" k2="1.600000" k3="-0.600000" k4="0"/>
-
-            <!-- Blur-all-except face -->
-            <feDiffuseLighting result="diffOut" diffuseConstant="1" lighting-color="white">
-              <feSpotLight id="spotlight" x="0" y="0" z="300" pointsAtX="100" pointsAtY="150" pointsAtZ="80" specularExponent="2" limitingConeAngle="22"></feSpotLight>
-            </feDiffuseLighting>
-            <feColorMatrix in="diffOut" result="alphaMap" type="luminanceToAlpha"></feColorMatrix>
-            <feComponentTransfer in="alphaMap" result="invertlight">
-                <feFuncA type="table" tableValues="1 0 0 0 0"></feFuncA>
-            </feComponentTransfer>
-            <feGaussianBlur in="invertlight" result="featherspot" stdDeviation="10"></feGaussianBlur>
-            <feComposite operator="xor" result="infocus" in2="dynResult-0" in="featherspot"></feComposite>     
-            <feGaussianBlur in="SourceGraphic" result="outfocus" stdDeviation="7"></feGaussianBlur>
-            <feComposite operator="over" in="infocus" in2="outfocus"></feComposite>    
-  
-            <!--saturate-->      
-            <feColorMatrix type="saturate" values="0.5" result="a"/>
-<feColorMatrix result="b" type="matrix" values=".343 .669 .119 0 0 .249 .626 .130 0 0 .172 .334 .111 0 0 .000 .000 .000 1 0" />
-
-
-<feBlend id="blend-0" result="ee" in="a" in2="b" mode="screen"></feBlend>
-
-
-        </filter>
-    </defs>
-    <image filter="url(#f7)" xlink:href="girl.jpg" width="100%" height="100%"  preserveAspectRatio="xMidYMid meet"/>
-</svg>
-
-## 4) Выделяем побольше красного
-
-<svg width="570" height="400">
-    <defs>
-        <filter id="f8">
-            
-
-
-
-            <!--Soften-Sharpen-->
-            <feGaussianBlur id="b1-0" result="blurOut-0" in="SourceGraphic" stdDeviation="50"/>
-            <feComposite id="c1-0" result="dynResult-0" in="SourceGraphic" in2="blurOut-0" operator="arithmetic" k1="0" k2="1.600000" k3="-0.600000" k4="0"/>
-
-            <!-- Blur-all-except face -->
-            <feDiffuseLighting result="diffOut" diffuseConstant="1" lighting-color="white">
-              <feSpotLight id="spotlight" x="0" y="0" z="300" pointsAtX="100" pointsAtY="150" pointsAtZ="80" specularExponent="2" limitingConeAngle="22"></feSpotLight>
-            </feDiffuseLighting>
-            <feColorMatrix in="diffOut" result="alphaMap" type="luminanceToAlpha"></feColorMatrix>
-            <feComponentTransfer in="alphaMap" result="invertlight">
-                <feFuncA type="table" tableValues="1 0 0 0 0"></feFuncA>
-            </feComponentTransfer>
-            <feGaussianBlur in="invertlight" result="featherspot" stdDeviation="10"></feGaussianBlur>
-            <feComposite operator="xor" result="infocus" in2="dynResult-0" in="featherspot"></feComposite>     
-            <feGaussianBlur in="SourceGraphic" result="outfocus" stdDeviation="7"></feGaussianBlur>
-            <feComposite operator="over" in="infocus" in2="outfocus"></feComposite>     
-  
-            <!--saturate-->      
-            <feColorMatrix type="saturate" values="0.5" result="a"/>
-<feColorMatrix result="b" type="matrix" values=".343 .669 .119 0 0 .249 .626 .130 0 0 .172 .334 .111 0 0 .000 .000 .000 1 0" />
-
-
-<feBlend id="blend-0" result="ee" in="a" in2="b" mode="screen"></feBlend>
-
-<!--Red curve-->
-<!--Red curve-->
-            <feComponentTransfer id="svg-9" result="transfer-0">
-                <feFuncR type="table" id="redChannel-0" tableValues="0.0000, 0.1104, 0.6069, 0.8794, 0.9517, 0.9828, 1.0000"/>
-            </feComponentTransfer>
-        </filter>
-    </defs>
-    <image filter="url(#f8)" xlink:href="girl.jpg" width="100%" height="100%"  preserveAspectRatio="xMidYMid meet"/>
-</svg>
-
-## 5) Затемнение по контуру
-
-<svg width="570" height="400">
-    <defs>
-        <filter id="f18">
-            
-            <!--Soften-Sharpen-->
-            <feGaussianBlur id="b1-0" result="blurOut-0" in="SourceGraphic" stdDeviation="50"/>
-            <feComposite id="c1-0" result="dynResult-0" in="SourceGraphic" in2="blurOut-0" operator="arithmetic" k1="0" k2="1.600000" k3="-0.600000" k4="0"/>
-
-
-            <!-- Blur-all-except face -->
-            <feDiffuseLighting result="diffOut" diffuseConstant="1" lighting-color="white">
-              <feSpotLight id="spotlight" x="0" y="0" z="300" pointsAtX="100" pointsAtY="150" pointsAtZ="80" specularExponent="2" limitingConeAngle="22"></feSpotLight>
-            </feDiffuseLighting>
-            <feColorMatrix in="diffOut" result="alphaMap" type="luminanceToAlpha"></feColorMatrix>
-            <feComponentTransfer in="alphaMap" result="invertlight">
-                <feFuncA type="table" tableValues="1 0 0 0 0"></feFuncA>
-            </feComponentTransfer>
-            <feGaussianBlur in="invertlight" result="featherspot" stdDeviation="10"></feGaussianBlur>
-            <feComposite operator="xor" result="infocus" in2="dynResult-0" in="featherspot"></feComposite>     
-            <feGaussianBlur in="SourceGraphic" result="outfocus" stdDeviation="7"></feGaussianBlur>
-            <feComposite operator="over" in="infocus" in2="outfocus"></feComposite>  
-
-            <!--saturate-->      
-            <feColorMatrix type="saturate" values="0.5" result="a"/>
-<feColorMatrix result="b" type="matrix" values=".343 .669 .119 0 0 .249 .626 .130 0 0 .172 .334 .111 0 0 .000 .000 .000 1 0" />
-
-
-<feBlend id="blend-0" result="ee" in="a" in2="b" mode="screen"></feBlend>
-
-<!--Red curve-->
-            <feComponentTransfer id="svg-9" result="rr">
-                <feFuncR type="table" id="redChannel-0" tableValues="0.0000, 0.2897, 0.6069, 0.7897, 0.8965, 0.9828, 1.0000"/>
-            </feComponentTransfer>
-
-            <!--Spotlight-->
-            <feFlood id="rc" result="blackfield-0" x="0%" y="0%" width="100%" height="100%" in="SourceGraphic" flood-color="#000000" flood-opacity="1"></feFlood>
-            <feSpecularLighting id="specular-0" result="Spotlight-0" lighting-color="#FFFFFF" surfaceScale="1" specularConstant="1" specularExponent="50">
-              <fePointLight id="pointlight-0" x="100" y="200" z="500"></fePointLight>
-            </feSpecularLighting><feBlend id="svg-31" result="A-0" in="blackfield-0" in2="Spotlight-0" mode="lighten"></feBlend>
-            <feBlend id="blend-0" result="ee" in="A-0" in2="rr" mode="multiply"></feBlend>
-
-        </filter>
-    </defs>
-    <image filter="url(#f18)" xlink:href="girl.jpg" width="100%" height="100%"  preserveAspectRatio="xMidYMid meet"/>
-</svg>
-
-## 6) Размываем границы
-
-<svg width="570" height="400">
-    <defs>
-        <filter id="f198">
-            
-                       <!--Soften-Sharpen-->
-            <feGaussianBlur id="b1-0" result="blurOut-0" in="SourceGraphic" stdDeviation="50"/>
-            <feComposite id="c1-0" result="dynResult-0" in="SourceGraphic" in2="blurOut-0" operator="arithmetic" k1="0" k2="1.600000" k3="-0.600000" k4="0"/>
-
-
-            <!-- Blur-all-except face -->
-            <feDiffuseLighting result="diffOut" diffuseConstant="1" lighting-color="white">
-              <feSpotLight id="spotlight" x="0" y="0" z="300" pointsAtX="100" pointsAtY="150" pointsAtZ="80" specularExponent="2" limitingConeAngle="22"></feSpotLight>
-            </feDiffuseLighting>
-            <feColorMatrix in="diffOut" result="alphaMap" type="luminanceToAlpha"></feColorMatrix>
-            <feComponentTransfer in="alphaMap" result="invertlight">
-                <feFuncA type="table" tableValues="1 0 0 0 0"></feFuncA>
-            </feComponentTransfer>
-            <feGaussianBlur in="invertlight" result="featherspot" stdDeviation="10"></feGaussianBlur>
-            <feComposite operator="xor" result="infocus" in2="dynResult-0" in="featherspot"></feComposite>     
-            <feGaussianBlur in="SourceGraphic" result="outfocus" stdDeviation="7"></feGaussianBlur>
-            <feComposite operator="over" in="infocus" in2="outfocus"></feComposite>  
-
-            <!--saturate-->      
-            <feColorMatrix type="saturate" values="0.5" result="a"/>
-<feColorMatrix result="b" type="matrix" values=".343 .669 .119 0 0 .249 .626 .130 0 0 .172 .334 .111 0 0 .000 .000 .000 1 0" />
-
-
-<feBlend id="blend-0" result="ee" in="a" in2="b" mode="screen"></feBlend>
-
-<!--Red curve-->
-            <feComponentTransfer id="svg-9" result="rr">
-                <feFuncR type="table" id="redChannel-0" tableValues="0.0000, 0.2897, 0.6069, 0.7897, 0.8965, 0.9828, 1.0000"/>
-            </feComponentTransfer>
-
-            <!--Spotlight-->
-            <feFlood id="rc" result="blackfield-0" x="0%" y="0%" width="100%" height="100%" in="SourceGraphic" flood-color="#000000" flood-opacity="1"></feFlood>
-            <feSpecularLighting id="specular-0" result="Spotlight-0" lighting-color="#FFFFFF" surfaceScale="1" specularConstant="1" specularExponent="50">
-              <fePointLight id="pointlight-0" x="100" y="200" z="500"></fePointLight>
-            </feSpecularLighting><feBlend id="svg-31" result="A-0" in="blackfield-0" in2="Spotlight-0" mode="lighten"></feBlend>
-            <feBlend id="blend-0" result="ee" in="A-0" in2="rr" mode="multiply"></feBlend>
-
-            <!--Border--><feFlood id="flood-0" result="outside-0" x="-10" y="-10" width="590" height="420" in="ee" flood-color="#FFFFFF" flood-opacity="1"></feFlood><feFlood id="flood-outer-0" result="inside-0" x="20" y="20" width="530" height="360" in="ee" flood-color="#FFFFFF" flood-opacity="1"></feFlood><feComposite id="svg-35" result="B-0" in="outside-0" in2="inside-0" operator="out"></feComposite><feGaussianBlur id="blur-0" result="bluroverlay-0" in="B-0" stdDeviation="5"></feGaussianBlur><feBlend id="blend-0" result="C-0" in="ee" in2="bluroverlay-0" mode="lighten"></feBlend><feComposite id="svg-36" result="D-0" in="C-0" in2="ee" operator="in"></feComposite>
-
-        </filter>
-    </defs>
-    <image filter="url(#f198)" xlink:href="girl.jpg" width="100%" height="100%"  preserveAspectRatio="xMidYMid meet"/>
-</svg>
-
-
-## Борщ
-
-<svg width="600" height="400">
-    <image xlink:href="pictures/borsch.jpg" width="100%" height="100%"  preserveAspectRatio="xMidYMid meet"/>
-</svg>
-
-
-## Eating #borsch #russian #food
-
-<svg width="600" height="400">
-    <defs>
-        <filter id="f9" filterUnits="userSpaceOnUse" primitiveUnits="userSpaceOnUse">
-            
-            <!--Soften-Sharpen-->
-            <feGaussianBlur id="b1-0" result="blurOut-0" in="SourceGraphic" stdDeviation="30"/>
-            <feComposite id="c1-0" result="dynResult-0" in="SourceGraphic" in2="blurOut-0" operator="arithmetic" k1="0" k2="1.600000" k3="-0.600000" k4="0"/>
-
-            <!-- Blur-all-except face -->
-            <feDiffuseLighting result="diffOut" diffuseConstant="1" lighting-color="white">
-              <feSpotLight id="spotlight" x="0" y="0" z="150" pointsAtX="240" pointsAtY="150" pointsAtZ="120" specularExponent="12" limitingConeAngle="100"></feSpotLight>
-            </feDiffuseLighting>
-            <feColorMatrix in="diffOut" result="alphaMap" type="luminanceToAlpha"></feColorMatrix>
-            <feComponentTransfer in="alphaMap" result="invertlight">
-                <feFuncA type="table" tableValues="1 0 0 0 0"></feFuncA>
-            </feComponentTransfer>
-            <feGaussianBlur in="invertlight" result="featherspot" stdDeviation="10"></feGaussianBlur>
-            <feComposite operator="xor" result="infocus" in2="dynResult-0" in="featherspot"></feComposite>     
-            <feGaussianBlur in="SourceGraphic" result="outfocus" stdDeviation="7"></feGaussianBlur>
-            <feComposite operator="over" in="infocus" in2="outfocus"></feComposite>     
-  
-            <!--saturate-->      
-            <feColorMatrix type="saturate" values="2" result="rr"/>
-
-            <!--Spotlight-->
-            <feFlood id="flood-0" result="blackfield-0" x="0%" y="0%" width="100%" height="100%" in="SourceGraphic" flood-color="#000000" flood-opacity="1"></feFlood>
-            <feSpecularLighting id="specular-0" result="Spotlight-0" lighting-color="#FFFFFF" surfaceScale="1" specularConstant="1" specularExponent="60">
-              <fePointLight id="pointlight-0" x="400" y="200" z="500"></fePointLight>
-            </feSpecularLighting><feBlend id="svg-31" result="A-0" in="blackfield-0" in2="Spotlight-0" mode="lighten"></feBlend>
-            <feBlend id="blend-0" result="ee" in="A-0" in2="rr" mode="multiply"></feBlend>
-
-
-<!--Border--><feFlood id="flood-0" result="outside-0" x="-10" y="-10" width="620" height="420" in="ee" flood-color="#FFFFFF" flood-opacity="1"></feFlood><feFlood id="flood-outer-0" result="inside-0" x="20" y="20" width="560" height="360" in="ee" flood-color="#FFFFFF" flood-opacity="1"></feFlood><feComposite id="svg-35" result="B-0" in="outside-0" in2="inside-0" operator="out"></feComposite><feGaussianBlur id="blur-0" result="bluroverlay-0" in="B-0" stdDeviation="5"></feGaussianBlur><feBlend id="blend-0" result="C-0" in="ee" in2="bluroverlay-0" mode="lighten"></feBlend><feComposite id="svg-36" result="D-0" in="C-0" in2="ee" operator="in"></feComposite>
-
-
- <!--Border-->
-        </filter>
-    </defs>
-    <image filter="url(#f9)" xlink:href="pictures/borsch.jpg" width="100%" height="100%"  preserveAspectRatio="xMidYMid meet"/>
 </svg>
 
 
@@ -1394,33 +1193,374 @@ style: |
 ## Che
 {:.code17.center}
 
-<svg width="480" height="320" viewBox="0 0 320 240" 
-  xmlns="http://www.w3.org/2000/svg" version="1.1"
-  xmlns:xlink="http://www.w3.org/1999/xlink">
-   
-  <filter id="fche"  
-  filterUnits="userSpaceOnUse"
-  x="0" y="0" width="320" height="240">
-  <feImage id="fi1" xlink:href="img/test01.png"
-  x="0" y="0" width="320" height="240" result="i1" />
-  <feImage id="fi2" xlink:href="img/che.png"
-  x="0" y="0" width="320" height="240" result="i2" />
-
-
-  <feDisplacementMap id="fb" 
-  in="i1" in2="i2"
-  scale="0"
-  xChannelSelector="R" 
-  yChannelSelector="B"
-  x="0" y="0" width="500" height="500" />
-
-
-  <animate xlink:href="#fb" attributeName="scale" begin="0" calcMode="linear" values="500;-500;500" dur="10s" repeatCount="indefinite" />
-  
-  </filter>
-   </defs>
+<svg width="480" height="320" viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <filter id="fche"  filterUnits="userSpaceOnUse" x="0" y="0" width="320" height="240">
+      <feImage id="fi1" xlink:href="img/test01.png" x="0" y="0" width="320" height="240" result="i1" />
+      <feImage id="fi2" xlink:href="img/che.png" x="0" y="0" width="320" height="240" result="i2" />
+      <feDisplacementMap id="fb" in="i1" in2="i2" scale="0" xChannelSelector="R" yChannelSelector="B" x="0" y="0" width="500" height="500">
+        <animate xlink:href="#fb" attributeName="scale" begin="0" calcMode="linear" values="500;-500;500" dur="10s" repeatCount="indefinite" />
+      </feDisplacementMap>
+    </filter>
+  </defs>
   <g filter="url(#fche)" />
 </svg>
+
+## **Возможности анимации**
+
+## Анимация feDisplacementMap scale
+{:.code17.center}
+
+<svg width="600" height="300">
+  <defs>
+    <filter id="fanim1">
+      <feColorMatrix type="saturate" in="SourceGraphic" >
+        <animate attributeName="values" 
+        values="0;2;0"  dur="2s" repeatCount="indefinite"/>
+      </feColorMatrix>
+    </filter>
+  </defs>
+  <image x="0%" y="0" width="50%" height="100%" xlink:href="img/img1.jpg"/>
+  <image x="50%" y="0" width="50%" height="100%" xlink:href="img/img1.jpg" filter="url(#fanim1)"/>
+</svg>
+
+## Анимация feMorphology radius
+{:.code17.center}
+
+<svg width="600" height="300">
+  <defs>
+    <filter id="fanim3">
+      <feMorphology id='MQ' in='SourceGraphic' radius="42 0" operator='dilate'>
+      <animate attributeName="radius" dur="6s" values="0 0; 30 0; 0 30; 0 0" 
+      keyTimes="0; .3; .7; 1" repeatCount="indefinite"/>
+      </feMorphology>
+    </filter>
+  </defs>
+  <image x="0" y="0" width="100%" height="100%" xlink:href="img/img1.jpg" filter="url(#fanim3)"/>
+</svg>
+
+
+
+
+
+
+
+
+
+
+/************************* ХИПСТЕР ***************************/
+
+
+
+
+
+
+
+
+
+
+## Немного хипстерства<br> для примера
+{:.cover #hipstagirl}
+![](pictures/hipstagirl.jpg)
+
+## Вновь девушка
+
+<svg width="570" height="400">
+    <image xlink:href="girl.jpg" width="100%" height="100%"  preserveAspectRatio="xMidYMid meet"/>
+</svg>
+
+
+## 1) Подчеркнем темные области
+
+<svg width="570" height="400">
+    <defs>
+        <filter id="f5">           
+            <!--Soften-Sharpen-->
+            <feGaussianBlur id="b1-0" result="blurOut-0" in="SourceGraphic" stdDeviation="50"/>
+            <feComposite id="c1-0" result="dynResult-0" in="SourceGraphic" in2="blurOut-0" operator="arithmetic" k1="0" k2="1.600000" k3="-0.600000" k4="0"/>
+        </filter>
+    </defs>
+    <image filter="url(#f5)" xlink:href="girl.jpg" width="100%" height="100%"  preserveAspectRatio="xMidYMid meet"/>
+</svg>
+
+## 2) Blur по маске
+
+<svg width="570" height="400">
+    <defs>
+        <filter id="f6" >
+            
+            <!--Soften-Sharpen-->
+            <feGaussianBlur id="b1-0" result="blurOut-0" in="SourceGraphic" stdDeviation="50"/>
+            <feComposite id="c1-0" result="dynResult-0" in="SourceGraphic" in2="blurOut-0" operator="arithmetic" k1="0" k2="1.600000" k3="-0.600000" k4="0"/>
+
+            <!-- Blur-all-except face -->
+            <feDiffuseLighting result="diffOut" diffuseConstant="1" lighting-color="white">
+              <feSpotLight id="spotlight" x="0" y="0" z="300" pointsAtX="100" pointsAtY="150" pointsAtZ="80" specularExponent="2" limitingConeAngle="22"></feSpotLight>
+            </feDiffuseLighting>
+            <feColorMatrix in="diffOut" result="alphaMap" type="luminanceToAlpha"></feColorMatrix>
+            <feComponentTransfer in="alphaMap" result="invertlight">
+                <feFuncA type="table" tableValues="1 0 0 0 0"></feFuncA>
+            </feComponentTransfer>
+            <feGaussianBlur in="invertlight" result="featherspot" stdDeviation="10"></feGaussianBlur>
+            <feComposite operator="xor" result="infocus" in2="dynResult-0" in="featherspot"></feComposite>     
+            <feGaussianBlur in="SourceGraphic" result="outfocus" stdDeviation="7"></feGaussianBlur>
+            <feComposite operator="over" in="infocus" in2="outfocus"></feComposite>     
+        </filter>
+    </defs>
+    <image filter="url(#f6)" xlink:href="girl.jpg" width="100%" height="100%"  preserveAspectRatio="xMidYMid meet"/>
+</svg>
+
+## 3) Уменьшим цветовую насыщенность
+
+<svg width="570" height="400">
+    <defs>
+        <filter id="f7" >
+            
+            <!--Soften-Sharpen-->
+            <feGaussianBlur id="b1-0" result="blurOut-0" in="SourceGraphic" stdDeviation="50"/>
+            <feComposite id="c1-0" result="dynResult-0" in="SourceGraphic" in2="blurOut-0" operator="arithmetic" k1="0" k2="1.600000" k3="-0.600000" k4="0"/>
+
+            <!-- Blur-all-except face -->
+            <feDiffuseLighting result="diffOut" diffuseConstant="1" lighting-color="white">
+              <feSpotLight id="spotlight" x="0" y="0" z="300" pointsAtX="100" pointsAtY="150" pointsAtZ="80" specularExponent="2" limitingConeAngle="22"></feSpotLight>
+            </feDiffuseLighting>
+            <feColorMatrix in="diffOut" result="alphaMap" type="luminanceToAlpha"></feColorMatrix>
+            <feComponentTransfer in="alphaMap" result="invertlight">
+                <feFuncA type="table" tableValues="1 0 0 0 0"></feFuncA>
+            </feComponentTransfer>
+            <feGaussianBlur in="invertlight" result="featherspot" stdDeviation="10"></feGaussianBlur>
+            <feComposite operator="xor" result="infocus" in2="dynResult-0" in="featherspot"></feComposite>     
+            <feGaussianBlur in="SourceGraphic" result="outfocus" stdDeviation="7"></feGaussianBlur>
+            <feComposite operator="over" in="infocus" in2="outfocus"></feComposite>    
+  
+            <!--saturate-->      
+            <feColorMatrix type="saturate" values="0.5" result="a"/>
+<feColorMatrix result="b" type="matrix" values=".343 .669 .119 0 0 .249 .626 .130 0 0 .172 .334 .111 0 0 .000 .000 .000 1 0" />
+
+
+<feBlend id="blend-0" result="ee" in="a" in2="b" mode="screen"></feBlend>
+
+
+        </filter>
+    </defs>
+    <image filter="url(#f7)" xlink:href="girl.jpg" width="100%" height="100%"  preserveAspectRatio="xMidYMid meet"/>
+</svg>
+
+## 4) Выделяем побольше красного
+
+<svg width="570" height="400">
+    <defs>
+        <filter id="f8">
+            
+
+
+
+            <!--Soften-Sharpen-->
+            <feGaussianBlur id="b1-0" result="blurOut-0" in="SourceGraphic" stdDeviation="50"/>
+            <feComposite id="c1-0" result="dynResult-0" in="SourceGraphic" in2="blurOut-0" operator="arithmetic" k1="0" k2="1.600000" k3="-0.600000" k4="0"/>
+
+            <!-- Blur-all-except face -->
+            <feDiffuseLighting result="diffOut" diffuseConstant="1" lighting-color="white">
+              <feSpotLight id="spotlight" x="0" y="0" z="300" pointsAtX="100" pointsAtY="150" pointsAtZ="80" specularExponent="2" limitingConeAngle="22"></feSpotLight>
+            </feDiffuseLighting>
+            <feColorMatrix in="diffOut" result="alphaMap" type="luminanceToAlpha"></feColorMatrix>
+            <feComponentTransfer in="alphaMap" result="invertlight">
+                <feFuncA type="table" tableValues="1 0 0 0 0"></feFuncA>
+            </feComponentTransfer>
+            <feGaussianBlur in="invertlight" result="featherspot" stdDeviation="10"></feGaussianBlur>
+            <feComposite operator="xor" result="infocus" in2="dynResult-0" in="featherspot"></feComposite>     
+            <feGaussianBlur in="SourceGraphic" result="outfocus" stdDeviation="7"></feGaussianBlur>
+            <feComposite operator="over" in="infocus" in2="outfocus"></feComposite>     
+  
+            <!--saturate-->      
+            <feColorMatrix type="saturate" values="0.5" result="a"/>
+<feColorMatrix result="b" type="matrix" values=".343 .669 .119 0 0 .249 .626 .130 0 0 .172 .334 .111 0 0 .000 .000 .000 1 0" />
+
+
+<feBlend id="blend-0" result="ee" in="a" in2="b" mode="screen"></feBlend>
+
+<!--Red curve-->
+<!--Red curve-->
+            <feComponentTransfer id="svg-9" result="transfer-0">
+                <feFuncR type="table" id="redChannel-0" tableValues="0.0000, 0.1104, 0.6069, 0.8794, 0.9517, 0.9828, 1.0000"/>
+            </feComponentTransfer>
+        </filter>
+    </defs>
+    <image filter="url(#f8)" xlink:href="girl.jpg" width="100%" height="100%"  preserveAspectRatio="xMidYMid meet"/>
+</svg>
+
+## 5) Затемнение по контуру
+
+<svg width="570" height="400">
+    <defs>
+        <filter id="f18">
+            
+            <!--Soften-Sharpen-->
+            <feGaussianBlur id="b1-0" result="blurOut-0" in="SourceGraphic" stdDeviation="50"/>
+            <feComposite id="c1-0" result="dynResult-0" in="SourceGraphic" in2="blurOut-0" operator="arithmetic" k1="0" k2="1.600000" k3="-0.600000" k4="0"/>
+
+
+            <!-- Blur-all-except face -->
+            <feDiffuseLighting result="diffOut" diffuseConstant="1" lighting-color="white">
+              <feSpotLight id="spotlight" x="0" y="0" z="300" pointsAtX="100" pointsAtY="150" pointsAtZ="80" specularExponent="2" limitingConeAngle="22"></feSpotLight>
+            </feDiffuseLighting>
+            <feColorMatrix in="diffOut" result="alphaMap" type="luminanceToAlpha"></feColorMatrix>
+            <feComponentTransfer in="alphaMap" result="invertlight">
+                <feFuncA type="table" tableValues="1 0 0 0 0"></feFuncA>
+            </feComponentTransfer>
+            <feGaussianBlur in="invertlight" result="featherspot" stdDeviation="10"></feGaussianBlur>
+            <feComposite operator="xor" result="infocus" in2="dynResult-0" in="featherspot"></feComposite>     
+            <feGaussianBlur in="SourceGraphic" result="outfocus" stdDeviation="7"></feGaussianBlur>
+            <feComposite operator="over" in="infocus" in2="outfocus"></feComposite>  
+
+            <!--saturate-->      
+            <feColorMatrix type="saturate" values="0.5" result="a"/>
+<feColorMatrix result="b" type="matrix" values=".343 .669 .119 0 0 .249 .626 .130 0 0 .172 .334 .111 0 0 .000 .000 .000 1 0" />
+
+
+<feBlend id="blend-0" result="ee" in="a" in2="b" mode="screen"></feBlend>
+
+<!--Red curve-->
+            <feComponentTransfer id="svg-9" result="rr">
+                <feFuncR type="table" id="redChannel-0" tableValues="0.0000, 0.2897, 0.6069, 0.7897, 0.8965, 0.9828, 1.0000"/>
+            </feComponentTransfer>
+
+            <!--Spotlight-->
+            <feFlood id="rc" result="blackfield-0" x="0%" y="0%" width="100%" height="100%" in="SourceGraphic" flood-color="#000000" flood-opacity="1"></feFlood>
+            <feSpecularLighting id="specular-0" result="Spotlight-0" lighting-color="#FFFFFF" surfaceScale="1" specularConstant="1" specularExponent="50">
+              <fePointLight id="pointlight-0" x="100" y="200" z="500"></fePointLight>
+            </feSpecularLighting><feBlend id="svg-31" result="A-0" in="blackfield-0" in2="Spotlight-0" mode="lighten"></feBlend>
+            <feBlend id="blend-0" result="ee" in="A-0" in2="rr" mode="multiply"></feBlend>
+
+        </filter>
+    </defs>
+    <image filter="url(#f18)" xlink:href="girl.jpg" width="100%" height="100%"  preserveAspectRatio="xMidYMid meet"/>
+</svg>
+
+## 6) Размываем границы
+
+<svg width="570" height="400">
+    <defs>
+        <filter id="f198">
+            
+                       <!--Soften-Sharpen-->
+            <feGaussianBlur id="b1-0" result="blurOut-0" in="SourceGraphic" stdDeviation="50"/>
+            <feComposite id="c1-0" result="dynResult-0" in="SourceGraphic" in2="blurOut-0" operator="arithmetic" k1="0" k2="1.600000" k3="-0.600000" k4="0"/>
+
+
+            <!-- Blur-all-except face -->
+            <feDiffuseLighting result="diffOut" diffuseConstant="1" lighting-color="white">
+              <feSpotLight id="spotlight" x="0" y="0" z="300" pointsAtX="100" pointsAtY="150" pointsAtZ="80" specularExponent="2" limitingConeAngle="22"></feSpotLight>
+            </feDiffuseLighting>
+            <feColorMatrix in="diffOut" result="alphaMap" type="luminanceToAlpha"></feColorMatrix>
+            <feComponentTransfer in="alphaMap" result="invertlight">
+                <feFuncA type="table" tableValues="1 0 0 0 0"></feFuncA>
+            </feComponentTransfer>
+            <feGaussianBlur in="invertlight" result="featherspot" stdDeviation="10"></feGaussianBlur>
+            <feComposite operator="xor" result="infocus" in2="dynResult-0" in="featherspot"></feComposite>     
+            <feGaussianBlur in="SourceGraphic" result="outfocus" stdDeviation="7"></feGaussianBlur>
+            <feComposite operator="over" in="infocus" in2="outfocus"></feComposite>  
+
+            <!--saturate-->      
+            <feColorMatrix type="saturate" values="0.5" result="a"/>
+<feColorMatrix result="b" type="matrix" values=".343 .669 .119 0 0 .249 .626 .130 0 0 .172 .334 .111 0 0 .000 .000 .000 1 0" />
+
+
+<feBlend id="blend-0" result="ee" in="a" in2="b" mode="screen"></feBlend>
+
+<!--Red curve-->
+            <feComponentTransfer id="svg-9" result="rr">
+                <feFuncR type="table" id="redChannel-0" tableValues="0.0000, 0.2897, 0.6069, 0.7897, 0.8965, 0.9828, 1.0000"/>
+            </feComponentTransfer>
+
+            <!--Spotlight-->
+            <feFlood id="rc" result="blackfield-0" x="0%" y="0%" width="100%" height="100%" in="SourceGraphic" flood-color="#000000" flood-opacity="1"></feFlood>
+            <feSpecularLighting id="specular-0" result="Spotlight-0" lighting-color="#FFFFFF" surfaceScale="1" specularConstant="1" specularExponent="50">
+              <fePointLight id="pointlight-0" x="100" y="200" z="500"></fePointLight>
+            </feSpecularLighting><feBlend id="svg-31" result="A-0" in="blackfield-0" in2="Spotlight-0" mode="lighten"></feBlend>
+            <feBlend id="blend-0" result="ee" in="A-0" in2="rr" mode="multiply"></feBlend>
+
+            <!--Border--><feFlood id="flood-0" result="outside-0" x="-10" y="-10" width="590" height="420" in="ee" flood-color="#FFFFFF" flood-opacity="1"></feFlood><feFlood id="flood-outer-0" result="inside-0" x="20" y="20" width="530" height="360" in="ee" flood-color="#FFFFFF" flood-opacity="1"></feFlood><feComposite id="svg-35" result="B-0" in="outside-0" in2="inside-0" operator="out"></feComposite><feGaussianBlur id="blur-0" result="bluroverlay-0" in="B-0" stdDeviation="5"></feGaussianBlur><feBlend id="blend-0" result="C-0" in="ee" in2="bluroverlay-0" mode="lighten"></feBlend><feComposite id="svg-36" result="D-0" in="C-0" in2="ee" operator="in"></feComposite>
+
+        </filter>
+    </defs>
+    <image filter="url(#f198)" xlink:href="girl.jpg" width="100%" height="100%"  preserveAspectRatio="xMidYMid meet"/>
+</svg>
+
+
+## Борщ
+
+<svg width="600" height="400">
+    <image xlink:href="pictures/borsch.jpg" width="100%" height="100%"  preserveAspectRatio="xMidYMid meet"/>
+</svg>
+
+
+## Eating #borsch #russian #food
+
+<svg width="600" height="400">
+    <defs>
+        <filter id="f9" filterUnits="userSpaceOnUse" primitiveUnits="userSpaceOnUse">
+            
+            <!--Soften-Sharpen-->
+            <feGaussianBlur id="b1-0" result="blurOut-0" in="SourceGraphic" stdDeviation="30"/>
+            <feComposite id="c1-0" result="dynResult-0" in="SourceGraphic" in2="blurOut-0" operator="arithmetic" k1="0" k2="1.600000" k3="-0.600000" k4="0"/>
+
+            <!-- Blur-all-except face -->
+            <feDiffuseLighting result="diffOut" diffuseConstant="1" lighting-color="white">
+              <feSpotLight id="spotlight" x="0" y="0" z="150" pointsAtX="240" pointsAtY="150" pointsAtZ="120" specularExponent="12" limitingConeAngle="100"></feSpotLight>
+            </feDiffuseLighting>
+            <feColorMatrix in="diffOut" result="alphaMap" type="luminanceToAlpha"></feColorMatrix>
+            <feComponentTransfer in="alphaMap" result="invertlight">
+                <feFuncA type="table" tableValues="1 0 0 0 0"></feFuncA>
+            </feComponentTransfer>
+            <feGaussianBlur in="invertlight" result="featherspot" stdDeviation="10"></feGaussianBlur>
+            <feComposite operator="xor" result="infocus" in2="dynResult-0" in="featherspot"></feComposite>     
+            <feGaussianBlur in="SourceGraphic" result="outfocus" stdDeviation="7"></feGaussianBlur>
+            <feComposite operator="over" in="infocus" in2="outfocus"></feComposite>     
+  
+            <!--saturate-->      
+            <feColorMatrix type="saturate" values="2" result="rr"/>
+
+            <!--Spotlight-->
+            <feFlood id="flood-0" result="blackfield-0" x="0%" y="0%" width="100%" height="100%" in="SourceGraphic" flood-color="#000000" flood-opacity="1"></feFlood>
+            <feSpecularLighting id="specular-0" result="Spotlight-0" lighting-color="#FFFFFF" surfaceScale="1" specularConstant="1" specularExponent="60">
+              <fePointLight id="pointlight-0" x="400" y="200" z="500"></fePointLight>
+            </feSpecularLighting><feBlend id="svg-31" result="A-0" in="blackfield-0" in2="Spotlight-0" mode="lighten"></feBlend>
+            <feBlend id="blend-0" result="ee" in="A-0" in2="rr" mode="multiply"></feBlend>
+
+
+<!--Border--><feFlood id="flood-0" result="outside-0" x="-10" y="-10" width="620" height="420" in="ee" flood-color="#FFFFFF" flood-opacity="1"></feFlood><feFlood id="flood-outer-0" result="inside-0" x="20" y="20" width="560" height="360" in="ee" flood-color="#FFFFFF" flood-opacity="1"></feFlood><feComposite id="svg-35" result="B-0" in="outside-0" in2="inside-0" operator="out"></feComposite><feGaussianBlur id="blur-0" result="bluroverlay-0" in="B-0" stdDeviation="5"></feGaussianBlur><feBlend id="blend-0" result="C-0" in="ee" in2="bluroverlay-0" mode="lighten"></feBlend><feComposite id="svg-36" result="D-0" in="C-0" in2="ee" operator="in"></feComposite>
+
+
+ <!--Border-->
+        </filter>
+    </defs>
+    <image filter="url(#f9)" xlink:href="pictures/borsch.jpg" width="100%" height="100%"  preserveAspectRatio="xMidYMid meet"/>
+</svg>
+
+
+/************************* ХИПСТЕР ***************************/
+
+
+
+
+
+
+
+
+## **SVG filters for html**
+{:.cover #hhh4}
+
+## **CSS filter effects**
+{:.cover #hhh5}
+
+## **CSS shaders**
+{:.cover #hhh6}
+
+
+
+
+
 
 ## Возможности svg фильтров
 
