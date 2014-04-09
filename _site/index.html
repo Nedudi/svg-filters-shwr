@@ -112,24 +112,134 @@ var pixels = context.getImageData(0, 0, w, h).data;
 </code></pre>
 
 </div></section>
+<section class="slide" id="canvas"><div><h2>Достоинства фильтрации с canvas</h2>
+
+<ol>
+  <li class="next">IE 9 + и мобильные браузеры.</li>
+  <li class="next">Много готовых решений, библиотек, плагинов.</li>
+  <li class="next">Фильтры могут быть настолько сложными и нестандартными, насколько у вас хватит фантазии <br />. . . <span class="next">и насколько вы разбираетесь в цифровой обработке изображений :)</span></li>
+</ol>
+
+</div></section>
+<section class="slide" id="canvas-1"><div><h2>Недостатки фильтрации с canvas</h2>
+
+<ol>
+  <li class="next">Нельзя отфильтровать картинки с других доменов (включая поддомены) из-за ограничений безопасности. Решается проксированием или переводом в base64.</li>
+  <li class="next">Сложные фильтры это медленная, блокирующая операция. <br /><span class="next">Десктопный браузер подтормаживает…</span><br /><span class="next">Мобильный браузер серьезно тупит.</span></li>
+</ol>
+
+</div></section>
 <section class="slide shout" class="cover" id="hhh2"><div><h2>WebGL</h2>
 
 </div></section>
-<section class="slide" id="webgl-stuff-here"><div><h2>webgl stuff here</h2>
+<section class="slide codepl250" id="o-"><div><h2>Что это о_O ?</h2>
+
+<pre><code>precision mediump float;
+varying vec2 position;
+uniform sampler2D webcam;
+
+void main() {
+  vec2 p = position;
+  vec4 color = texture2D(webcam, p);
+  color.rgb = 1.0 - color.rgb;
+  gl_FragColor = color;
+}
+</code></pre>
+
+</div></section>
+<section class="slide" id="section-3"><div><h2>Шейдеры</h2>
+
+<ul>
+  <li class="next">Шейдер - кусок кода, который описывает алгоритм обработки каждого пикселя в GPU. </li>
+  <li class="next">Самое главное достоинство -  возможность пользоваться параллельной архитектурой GPU.</li>
+  <li class="next">Бывают векторными и пиксельными (Fragment Shaders) </li>
+  <li class="next">Описываются в синтаксисе GLSL (OpenGL Shading Language)</li>
+</ul>
+
+</div></section>
+<section class="slide codepl250" id="c-"><div><h2>Вернемся к “cтрашному” шейдеру</h2>
+
+<pre><code>precision mediump float;
+varying vec2 position;
+uniform sampler2D webcam;
+
+void main() {
+  vec2 p = position;
+  vec4 color = texture2D(webcam, p);
+  <mark>color.rgb = 1.0 - color.rgb;</mark>
+  gl_FragColor = color;
+}
+</code></pre>
+
+</div></section>
+<section class="slide code13" id="section-4"><div><h2>Здесь точно не стоит изобретать свой велосипед</h2>
+
+<p><img style="width: 600px; margin:0 auto; display: block" src="img/b2.gif" /></p>
+
+</div></section><section class="slide"><div>
+
+<p><img style="height: 500px; width: auto;margin:0 auto; display: block" src="img/glfx.png" /></p>
+
+</div></section>
+<section class="slide" id="glfx"><div><h2>Достоинства glfx</h2>
+
+<ol>
+  <li class="next">Множество предустановленных фильтров.</li>
+  <li class="next">Красивый и понятный API.</li>
+  <li class="next">Возможность расширять библиотеку своими шейдерами.</li>
+</ol>
+
+</div></section><section class="slide"><div>
+
+</div></section>
+<section class="slide" id="webglimagefilter"><div><h2>WebGLImageFilter</h2>
+
+<p><img style="height: 400px; width: auto;margin:0 auto; display: block" src="img/webglimagefilter.png" /></p>
+
+</div></section>
+<section class="slide codepl150 code13" id="webglimagefilter---"><div><h2>WebGLImageFilter прост в использовании</h2>
+
+<pre><code>var filter = new WebGLImageFilter();
+filter.addFilter('hue', 180);
+filter.addFilter('negative');
+filter.addFilter('blur', 7);
+var filteredImage = filter.apply(inputImage);
+</code></pre>
+
+</div></section>
+<section class="slide" id="webgl"><div><h2>Достоинства фильтрации с WebGL</h2>
+
+<ol>
+  <li class="next">Очень, очень, очень быстро.</li>
+  <li class="next">Есть несколько хороших плагинов.</li>
+  <li class="next">Можно ре-использовать любые шейдеры написаные за 14 лет для OpenGL на GLSL (2001 - 2014).</li>
+</ol>
+
+</div></section>
+<section class="slide" id="webgl-1"><div><h2>Недостатки фильтрации с WebGL</h2>
+
+<ol>
+  <li class="next">Слабая поддержка браузерами. Chrome, Opera - отлично, FF, Safari, IE11 - частично, все остальные - никак.</li>
+  <li class="next">Нельзя отфильтровать картинки с других доменов (включая поддомены) из-за ограничений безопасности. Решается проксированием или переводом в base64.</li>
+</ol>
 
 </div></section>
 <section class="slide shout" class="cover" id="hhh3"><div><h2>SVG filters</h2>
 
 </div></section>
-<section class="slide" id="section-3"><div><h2>Нарисуем круг</h2>
+<section class="slide code14 codepl200" id="section-5"><div><h2>Нарисуем круг</h2>
 
 <pre><code>&lt;svg width="400" height="400"&gt;
-    &lt;circle cx="200" cy="200" fill="#3498db" r="100"/&gt;
+    &lt;circle 
+      cx="200" 
+      cy="200" 
+      fill="#3498db" 
+      r="100"/&gt;
 &lt;/svg&gt;
 </code></pre>
 
 </div></section>
-<section class="slide" id="section-4"><div><h2>Это круг :)</h2>
+<section class="slide" id="section-6"><div><h2>Это круг :)</h2>
 
 <svg width="400" height="400">
     <circle cx="200" cy="200" fill="#3498db" r="100" />
@@ -188,7 +298,7 @@ var pixels = context.getImageData(0, 0, w, h).data;
 </code></pre>
 
 </div></section>
-<section class="slide" id="section-5"><div><h2>Результат</h2>
+<section class="slide" id="section-7"><div><h2>Результат</h2>
 
 <svg width="400" height="400">
   <defs>
@@ -200,10 +310,13 @@ var pixels = context.getImageData(0, 0, w, h).data;
 </svg>
 
 </div></section>
-<section class="slide" id="svg"><div><h2>Картинка внутри SVG</h2>
+<section class="slide code14 codepl150" id="svg"><div><h2>Картинка внутри SVG</h2>
 
 <pre><code>&lt;svg width="570" height="400"&gt;
-  <mark>&lt;image width="100%" height="100%"  <mark>xlink:href="girl.jpg"</mark> /&gt;</mark>
+  &lt;image 
+    width="100%" 
+    height="100%"  
+    <mark>xlink:href="girl.jpg"</mark> /&gt;
 &lt;/svg&gt;
 </code></pre>
 
@@ -241,7 +354,7 @@ var pixels = context.getImageData(0, 0, w, h).data;
 </svg>
 
 </div></section>
-<section class="slide" id="section-6"><div><h2>Комбинация фильтров</h2>
+<section class="slide code13" id="section-8"><div><h2>Комбинация фильтров</h2>
 
 <pre><code>&lt;filter id="f2"&gt;
   &lt;feGaussianBlur stdDeviation="3" /&gt;
@@ -251,27 +364,27 @@ var pixels = context.getImageData(0, 0, w, h).data;
 </code></pre>
 
 </div></section>
-<section class="slide" id="section-7"><div><h2>Комбинация фильтров</h2>
+<section class="slide code13" id="section-9"><div><h2>Комбинация фильтров</h2>
 
 <pre><code>&lt;filter id="f2"&gt;
-  &lt;feGaussianBlur <mark>result="a1"</mark> stdDeviation="3" /&gt;</mark>
+  &lt;feGaussianBlur <mark>result="<mark>a1</mark>"</mark> stdDeviation="3" /&gt;</mark>
   &lt;feColorMatrix type="saturate" values="0"&gt;
   &lt;/feColorMatrix&gt;
 &lt;/filter&gt;
 </code></pre>
 
 </div></section>
-<section class="slide" id="section-8"><div><h2>Комбинация фильтров</h2>
+<section class="slide code13" id="section-10"><div><h2>Комбинация фильтров</h2>
 
 <pre><code>&lt;filter id="f2"&gt;
   &lt;feGaussianBlur result="a1" stdDeviation="3" /&gt;
-  &lt;feColorMatrix <mark>in="a1"</mark> type="saturate" values="0"&gt;
+  &lt;feColorMatrix <mark>in="<mark>a1</mark>"</mark> type="saturate" values="0"&gt;
   &lt;/feColorMatrix&gt;
 &lt;/filter&gt;
 </code></pre>
 
 </div></section>
-<section class="slide" id="section-9"><div><h2>Комбинация фильтров</h2>
+<section class="slide code13" id="section-11"><div><h2>Комбинация фильтров</h2>
 
 <pre><code>&lt;filter id="f2"&gt;
   &lt;feGaussianBlur <mark>result="<mark>a1</mark>"</mark> stdDeviation="3" /&gt;
@@ -281,7 +394,7 @@ var pixels = context.getImageData(0, 0, w, h).data;
 </code></pre>
 
 </div></section>
-<section class="slide" id="section-10"><div><h2>Комбинация фильтров</h2>
+<section class="slide" id="section-12"><div><h2>Комбинация фильтров</h2>
 
 <svg width="570" height="400">
   <defs>
@@ -1058,7 +1171,7 @@ kernelMatrix="<mark>1 1 1 1 1 1 -2 -2 -2 1 1 -2 0 -2 1 1 -2 -2 -2 1 1 1 1 1 1</m
 </svg>
 
 </div></section>
-<section class="slide code10 center" id="section-11"><div><h2>Красный канал. 20 градусов</h2>
+<section class="slide code10 center" id="section-13"><div><h2>Красный канал. 20 градусов</h2>
 
 <svg width="330" height="330">
     <defs>
@@ -1112,7 +1225,7 @@ kernelMatrix="<mark>1 1 1 1 1 1 -2 -2 -2 1 1 -2 0 -2 1 1 -2 -2 -2 1 1 1 1 1 1</m
 </svg>
 
 </div></section>
-<section class="slide code17 center" id="section-12"><div><h2>+ Неподвижный зеленый</h2>
+<section class="slide code17 center" id="section-14"><div><h2>+ Неподвижный зеленый</h2>
 
 <svg width="330" height="330">
     <defs>
@@ -1245,7 +1358,7 @@ kernelMatrix="<mark>1 1 1 1 1 1 -2 -2 -2 1 1 -2 0 -2 1 1 -2 -2 -2 1 1 1 1 1 1</m
 </svg>
 
 </div></section>
-<section class="slide shout" id="section-13"><div><h2>Возможности анимации</h2>
+<section class="slide shout" id="section-15"><div><h2>Возможности анимации</h2>
 
 </div></section>
 <section class="slide code17 center" id="fedisplacementmap-scale"><div><h2>Анимация feDisplacementMap scale</h2>
@@ -1283,14 +1396,14 @@ kernelMatrix="<mark>1 1 1 1 1 1 -2 -2 -2 1 1 -2 0 -2 1 1 -2 -2 -2 1 1 1 1 1 1</m
 <p><img src="pictures/hipstagirl.jpg" alt="" /></p>
 
 </div></section>
-<section class="slide" id="section-14"><div><h2>Вновь девушка</h2>
+<section class="slide" id="section-16"><div><h2>Вновь девушка</h2>
 
 <svg width="570" height="400">
     <image xlink:href="girl.jpg" width="100%" height="100%" preserveaspectratio="xMidYMid meet" />
 </svg>
 
 </div></section>
-<section class="slide" id="section-15"><div><h2>1) Подчеркнем темные области</h2>
+<section class="slide" id="section-17"><div><h2>1) Подчеркнем темные области</h2>
 
 <svg width="570" height="400">
     <defs>
@@ -1332,7 +1445,7 @@ kernelMatrix="<mark>1 1 1 1 1 1 -2 -2 -2 1 1 -2 0 -2 1 1 -2 -2 -2 1 1 1 1 1 1</m
 </svg>
 
 </div></section>
-<section class="slide" id="section-16"><div><h2>3) Уменьшим цветовую насыщенность</h2>
+<section class="slide" id="section-18"><div><h2>3) Уменьшим цветовую насыщенность</h2>
 
 <svg width="570" height="400">
     <defs>
@@ -1369,7 +1482,7 @@ kernelMatrix="<mark>1 1 1 1 1 1 -2 -2 -2 1 1 -2 0 -2 1 1 -2 -2 -2 1 1 1 1 1 1</m
 </svg>
 
 </div></section>
-<section class="slide" id="section-17"><div><h2>4) Выделяем побольше красного</h2>
+<section class="slide" id="section-19"><div><h2>4) Выделяем побольше красного</h2>
 
 <svg width="570" height="400">
     <defs>
@@ -1413,7 +1526,7 @@ kernelMatrix="<mark>1 1 1 1 1 1 -2 -2 -2 1 1 -2 0 -2 1 1 -2 -2 -2 1 1 1 1 1 1</m
 </svg>
 
 </div></section>
-<section class="slide" id="section-18"><div><h2>5) Затемнение по контуру</h2>
+<section class="slide" id="section-20"><div><h2>5) Затемнение по контуру</h2>
 
 <svg width="570" height="400">
     <defs>
@@ -1462,7 +1575,7 @@ kernelMatrix="<mark>1 1 1 1 1 1 -2 -2 -2 1 1 -2 0 -2 1 1 -2 -2 -2 1 1 1 1 1 1</m
 </svg>
 
 </div></section>
-<section class="slide" id="section-19"><div><h2>6) Размываем границы</h2>
+<section class="slide" id="section-21"><div><h2>6) Размываем границы</h2>
 
 <svg width="570" height="400">
     <defs>
@@ -1513,7 +1626,7 @@ kernelMatrix="<mark>1 1 1 1 1 1 -2 -2 -2 1 1 -2 0 -2 1 1 -2 -2 -2 1 1 1 1 1 1</m
 </svg>
 
 </div></section>
-<section class="slide" id="section-20"><div><h2>Борщ</h2>
+<section class="slide" id="section-22"><div><h2>Борщ</h2>
 
 <svg width="600" height="400">
     <image xlink:href="pictures/borsch.jpg" width="100%" height="100%" preserveaspectratio="xMidYMid meet" />

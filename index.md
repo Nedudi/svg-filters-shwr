@@ -109,23 +109,110 @@ style: |
         <mark>.render();</mark>
     });
 
+## Достоинства фильтрации с canvas
+
+1. …IE 9 + и мобильные браузеры.
+2. …Много готовых решений, библиотек, плагинов.
+3. …Фильтры могут быть настолько сложными и нестандартными, насколько у вас хватит фантазии <br>. . . <span  class="next"> и насколько вы разбираетесь в цифровой обработке изображений :)</span>
+
+## Недостатки фильтрации с canvas
+
+1. …Нельзя отфильтровать картинки с других доменов (включая поддомены) из-за ограничений безопасности. Решается проксированием или переводом в base64.
+2. …Сложные фильтры это медленная, блокирующая операция. <br><span  class="next">Десктопный браузер подтормаживает...</span><br><span  class="next">Мобильный браузер серьезно тупит.</span>
 
 
 ## **WebGL**
 {:.cover #hhh2}
 
-## webgl stuff here 
+## Что это о_O ?
+{:.codepl250}
 
+    precision mediump float;
+    varying vec2 position;
+    uniform sampler2D webcam;
 
+    void main() {
+      vec2 p = position;
+      vec4 color = texture2D(webcam, p);
+      color.rgb = 1.0 - color.rgb;
+      gl_FragColor = color;
+    }
+
+## Шейдеры 
+
+* …Шейдер - кусок кода, который описывает алгоритм обработки каждого пикселя в GPU. 
+* …Самое главное достоинство -  возможность пользоваться параллельной архитектурой GPU.
+* …Бывают векторными и пиксельными (Fragment Shaders) 
+* …Описываются в синтаксисе GLSL (OpenGL Shading Language)
+
+## Вернемся к "cтрашному" шейдеру
+{:.codepl250}
+
+    precision mediump float;
+    varying vec2 position;
+    uniform sampler2D webcam;
+
+    void main() {
+      vec2 p = position;
+      vec4 color = texture2D(webcam, p);
+      <mark>color.rgb = 1.0 - color.rgb;</mark>
+      gl_FragColor = color;
+    }
+
+## Здесь точно не стоит изобретать свой велосипед
+{:.code13}
+
+<img style="width: 600px; margin:0 auto; display: block" src="img/b2.gif" >
+
+---
+
+<img style="height: 500px; width: auto;margin:0 auto; display: block" src="img/glfx.png" >
+
+## Достоинства glfx
+
+1. …Множество предустановленных фильтров.
+2. …Красивый и понятный API.
+3. …Возможность расширять библиотеку своими шейдерами.
+
+---
+
+## WebGLImageFilter
+
+<img style="height: 400px; width: auto;margin:0 auto; display: block" src="img/webglimagefilter.png" >
+
+## WebGLImageFilter прост в использовании
+{:.codepl150.code13}
+
+    var filter = new WebGLImageFilter();
+    filter.addFilter('hue', 180);
+    filter.addFilter('negative');
+    filter.addFilter('blur', 7);
+    var filteredImage = filter.apply(inputImage);
+
+## Достоинства фильтрации с WebGL
+
+1. …Очень, очень, очень быстро.
+2. …Есть несколько хороших плагинов.
+3. …Можно ре-использовать любые шейдеры написаные за 14 лет для OpenGL на GLSL (2001 - 2014).
+
+## Недостатки фильтрации с WebGL
+
+1. …Слабая поддержка браузерами. Chrome, Opera - отлично, FF, Safari, IE11 - частично, все остальные - никак.
+2. …Нельзя отфильтровать картинки с других доменов (включая поддомены) из-за ограничений безопасности. Решается проксированием или переводом в base64.
 
 
 ## **SVG filters**
 {:.cover #hhh3}
 
 ## Нарисуем круг
+{:.code14.codepl200}
 
     <svg width="400" height="400">
-        <circle cx="200" cy="200" fill="#3498db" r="100"/>
+        <circle 
+          cx="200" 
+          cy="200" 
+          fill="#3498db" 
+          r="100"/>
     </svg>
 
 ## Это круг :)
@@ -191,9 +278,13 @@ style: |
 </svg>
 
 ## Картинка внутри SVG
+{:.code14.codepl150}
 
     <svg width="570" height="400">
-      <mark><image width="100%" height="100%"  <mark>xlink:href="girl.jpg"</mark> /></mark>
+      <image 
+        width="100%" 
+        height="100%"  
+        <mark>xlink:href="girl.jpg"</mark> />
     </svg>
 
 ## Картинка внутри SVG
@@ -228,6 +319,7 @@ style: |
 
 
 ## Комбинация фильтров
+{:.code13}
 
     <filter id="f2">
       <feGaussianBlur stdDeviation="3" />
@@ -236,22 +328,25 @@ style: |
     </filter>
 
 ## Комбинация фильтров
+{:.code13}
 
     <filter id="f2">
-      <feGaussianBlur <mark>result="a1"</mark> stdDeviation="3" /></mark>
+      <feGaussianBlur <mark>result="<mark>a1</mark>"</mark> stdDeviation="3" /></mark>
       <feColorMatrix type="saturate" values="0">
       </feColorMatrix>
     </filter>
 
 ## Комбинация фильтров
+{:.code13}
 
     <filter id="f2">
       <feGaussianBlur result="a1" stdDeviation="3" />
-      <feColorMatrix <mark>in="a1"</mark> type="saturate" values="0">
+      <feColorMatrix <mark>in="<mark>a1</mark>"</mark> type="saturate" values="0">
       </feColorMatrix>
     </filter>
 
 ## Комбинация фильтров
+{:.code13}
 
     <filter id="f2">
       <feGaussianBlur <mark>result="<mark>a1</mark>"</mark> stdDeviation="3" />

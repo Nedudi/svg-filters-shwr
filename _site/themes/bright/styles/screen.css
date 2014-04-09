@@ -225,7 +225,7 @@ svg{
   left: auto;
 }
 
-.code9 pre{font-size: 0.9em;}
+.code9  pre{font-size: 0.9em;}
 .code10 pre{font-size: 1.0em;}
 .code11 pre{font-size: 1.1em;}
 .code12 pre{font-size: 1.2em;}
@@ -234,6 +234,15 @@ svg{
 .code15 pre{font-size: 1.5em;}
 .code16 pre{font-size: 1.6em;}
 .code17 pre{font-size: 1.7em;}
+
+.codepl50  pre{padding-left:50px;}
+.codepl100 pre{padding-left:100px;}
+.codepl150 pre{padding-left:150px;}
+.codepl200 pre{padding-left:200px;}
+.codepl250 pre{padding-left:250px;}
+.codepl300 pre{padding-left:300px;}
+.codepl350 pre{padding-left:350px;}
+
 
 .codecenter{text-align: center;}
 .noheader h2{
