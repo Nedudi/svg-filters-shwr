@@ -4,6 +4,46 @@
 		"selected_items":
 		[
 			[
+				"pre",
+				"pre-line"
+			],
+			[
+				"no",
+				"nowrap"
+			],
+			[
+				"fon",
+				"font-style"
+			],
+			[
+				"bor",
+				"border"
+			],
+			[
+				"im",
+				"important"
+			],
+			[
+				"te",
+				"text-decoration"
+			],
+			[
+				"ma",
+				"margin-top"
+			],
+			[
+				"in",
+				"inline-block"
+			],
+			[
+				"pa",
+				"padding-left"
+			],
+			[
+				"fo",
+				"font-size"
+			],
+			[
 				"user",
 				"userData"
 			]
@@ -11,6 +51,30 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "index.md",
+			"settings":
+			{
+				"buffer_size": 61650,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "_config.yml",
+			"settings":
+			{
+				"buffer_size": 398,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "themes/bright/styles/screen.css",
+			"settings":
+			{
+				"buffer_size": 18231,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"command_palette":
@@ -39,6 +103,7 @@
 	},
 	"file_history":
 	[
+		"/Users/me/jekyller/themes/ribbon/styles/screen.css",
 		"/Users/me/yobeeda/public/js/application/main.js",
 		"/Users/me/yobeeda/views/application/body/header.jade",
 		"/Users/me/yobeeda/source/api/users.js",
@@ -86,6 +151,12 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"saturate",
+			"font-si",
+			"320",
+			"320384",
+			"320",
+			"1024",
 			"logou",
 			"{};\n",
 			"help-block",
@@ -109,8 +180,97 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "index.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 61650,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								41088,
+								41088
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Markdown/Markdown.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 19487.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "_config.yml",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 398,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/YAML/YAML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "themes/bright/styles/screen.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 18231,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								16823,
+								16823
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 3474.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
 			]
 		}
 	],
