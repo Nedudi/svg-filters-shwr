@@ -23,7 +23,15 @@
 <p><strong>Дмитрий Дудин <a href="http://twitter.com/nedudi">@nedudi</a> <br />РИТ++ 2014 Москва</strong></p>
 
 </div></section>
-<section class="slide h w cover cover-eye" id="eye2"><div><h2>Преукрасить</h2>
+<section class="slide code12 noheader gray" id="hello"><div><h2>Hello</h2>
+
+<p><a href="http://xbsoftware.com" target="_blank"><img style="margin:50px auto; height:110px; width:auto; display: block" src="img/logo-xbsoftware.png" /></a>
+<a href="http://webix.com" target="_blank"><img style="margin:20px auto; height:110px; width:auto; display: block" src="img/logo-webix.png" /></a>
+<a href="http://enjoycss.com" target="_blank"><img style="margin:40px auto 20px auto; height:130px; width:auto; display: block" src="img/logo-enjoycss.png" /></a>
+<a href="http://html5.by" target="_blank"><img style="margin:0 auto; height:140px; width:auto; display: block" src="img/html5by-logo-flat-256.png" /></a></p>
+
+</div></section>
+<section class="slide h w cover cover-eye" id="eye2"><div><h2>Приукрасить</h2>
 <p><img src="img/eye2.jpg" alt="" /></p>
 
 </div></section>
@@ -52,7 +60,7 @@
 </ul>
 
 </div></section>
-<section class="slide" id="br--"><div><h2>Фильтрация в веб <br />несколько лет назад</h2>
+<section class="slide" id="br--"><div><h2>Фильтрация изображений в веб <br />несколько лет назад:</h2>
 
 <ol>
   <li>Flash</li>
@@ -69,10 +77,10 @@
 <ol>
   <li class="next">Canvas</li>
   <li class="next">WebGL</li>
+  <li class="next">CSS-фильтры</li>
+  <li class="next">CSS-шейдеры</li>
   <li class="next">SVG-фильтры</li>
   <li class="next">SVG-фильтры для HTML</li>
-  <li class="next">CSS-фильтры</li>
-  <li class="next">CSS Shaders</li>
 </ol>
 
 </div></section>
@@ -225,24 +233,116 @@ var filteredImage = filter.apply(inputImage);
 <ol>
   <li class="next">Очень, очень, очень быстро.</li>
   <li class="next">Есть несколько хороших плагинов.</li>
-  <li class="next">Можно ре-использовать любые шейдеры 
-<br />написаные за 14 лет 
-<br />для OpenGL на GLSL c 2001 года.</li>
+  <li class="next">Можно использовать готовые шейдеры 
+<br />написаные на языке GLSL 
+<br />для OpenGL за последние 14 лет 
+<br />(начиная c 2001 года)</li>
 </ol>
 
 </div></section>
 <section class="slide" id="webgl-1"><div><h2>Недостатки фильтрации с WebGL</h2>
 
 <ol>
-  <li class="next">Слабая поддержка браузерами. Chrome, Opera - отлично, FF, Safari, IE11 - частично, все остальные - никак.</li>
-  <li class="next">Нельзя отфильтровать картинки с других доменов (включая поддомены) из-за ограничений безопасности. Решается проксированием или переводом в base64.</li>
+  <li class="next">Слабая поддержка браузерами.<br />Chrome, Opera - отлично, <br />FF, Safari, IE11 - частично, <br />все остальные - никак.</li>
+  <li class="next">Для нестандартных операций порог входа достаточно высок.</li>
+</ol>
+
+</div></section>
+<section class="slide shout" class="cover" id="hhh5"><div><h2>CSS-фильтры</h2>
+
+</div></section>
+<section class="slide codepl200 code15" id="css-"><div><h2>Синтаксис CSS-фильтров</h2>
+
+<pre><code>-webkit-filter: 
+  brightness(1.4) 
+  contrast(2) 
+  hue-rotate(300deg) 
+  sepia(0.3);
+</code></pre>
+
+</div></section>
+<section class="slide cover w h noheader" id="section-4"><div><h2>Картинка</h2>
+
+<p><img src="img/girl.jpg" /></p>
+
+</div></section>
+<section class="slide cover w h noheader" id="css--1"><div><h2>Картинка с css эффектом</h2>
+
+<p><img style="-webkit-filter: brightness(1.4) contrast(2) hue-rotate(300deg) sepia(0.3);" src="img/girl.jpg" /></p>
+
+</div></section>
+<section class="slide" id="css--2"><div><h2>Достоинства CSS-фильтров</h2>
+
+<ol>
+  <li class="next">Быстрые.</li>
+  <li class="next">Очень удобно описываются.</li>
+</ol>
+
+</div></section>
+<section class="slide" id="css--3"><div><h2>Недостатки CSS-фильтров</h2>
+
+<ol>
+  <li class="next">Пока только webkit(blink) браузеры.</li>
+  <li class="next">Ничего кроме типовых операций. <br /> т.е. … Инстаграма с ними не сделаешь :(</li>
+</ol>
+
+</div></section>
+<section class="slide shout" class="cover" id="hhh6"><div><h2>CSS-шейдеры</h2>
+
+</div></section>
+<section class="slide" id="section-5"><div><h2>Синтаксис</h2>
+
+<pre><code>img { 
+    -webkit-filter: custom(
+      none 
+      mix(
+        url(<mark>someFragmentShader.fs</mark>) 
+        normal 
+        source-atop
+      )
+    );
+}
+</code></pre>
+
+</div></section>
+<section class="slide" id="somefragmentshaderfs"><div><h2>someFragmentShader.fs</h2>
+
+<pre><code>precision mediump float;
+void main()
+{
+  css_ColorMatrix = mat4(1.0, 0.0, 0.0, 0.0,
+                         0.0, 0.0, 0.0, 0.0,
+                         0.0, 0.0, 0.0, 0.0,
+                         0.0, 0.0, 0.0, 1.0);
+}
+</code></pre>
+
+</div></section>
+<section class="slide cover w h noheader" id="css--4"><div><h2>Картинка с css эффектом</h2>
+
+<p><img src="img/dog.jpg" /></p>
+
+</div></section>
+<section class="slide" id="css--5"><div><h2>Достоинства CSS-шейдеров</h2>
+
+<ol>
+  <li class="next">Быстрые.</li>
+  <li class="next">Можно делать сложные нестандартные эффекты.</li>
+</ol>
+
+</div></section>
+<section class="slide" id="css--6"><div><h2>Недостатки CSS-шейдеров</h2>
+
+<ol>
+  <li class="next">Сложность описания, высокий порог входа.</li>
+  <li class="next">Вообще нигде толком не поддерживаются :)</li>
 </ol>
 
 </div></section>
 <section class="slide shout" class="cover" id="hhh3"><div><h2>SVG filters</h2>
 
 </div></section>
-<section class="slide code14 codepl100" id="section-4"><div><h2>Нарисуем круг</h2>
+<section class="slide code14 codepl100" id="section-6"><div><h2>Нарисуем круг</h2>
 
 <pre><code>&lt;svg width="400" height="400"&gt;
     &lt;circle 
@@ -254,7 +354,7 @@ var filteredImage = filter.apply(inputImage);
 </code></pre>
 
 </div></section>
-<section class="slide" id="section-5"><div><h2>Это круг :)</h2>
+<section class="slide" id="section-7"><div><h2>Это круг :)</h2>
 
 <svg width="400" height="400">
     <circle cx="200" cy="200" fill="#3498db" r="100" />
@@ -317,7 +417,7 @@ var filteredImage = filter.apply(inputImage);
 </code></pre>
 
 </div></section>
-<section class="slide" id="section-6"><div><h2>Результат</h2>
+<section class="slide" id="section-8"><div><h2>Результат</h2>
 
 <svg width="400" height="400">
   <defs>
@@ -373,7 +473,7 @@ var filteredImage = filter.apply(inputImage);
 </svg>
 
 </div></section>
-<section class="slide code10" id="section-7"><div><h2>Комбинация фильтров</h2>
+<section class="slide code10" id="section-9"><div><h2>Комбинация фильтров</h2>
 
 <pre><code>&lt;filter id="f2"&gt;
   &lt;feGaussianBlur stdDeviation="3" /&gt;
@@ -383,7 +483,7 @@ var filteredImage = filter.apply(inputImage);
 </code></pre>
 
 </div></section>
-<section class="slide code10" id="section-8"><div><h2>Комбинация фильтров</h2>
+<section class="slide code10" id="section-10"><div><h2>Комбинация фильтров</h2>
 
 <pre><code>&lt;filter id="f2"&gt;
   &lt;feGaussianBlur <mark>result="<mark>a1</mark>"</mark> stdDeviation="3" /&gt;</mark>
@@ -393,7 +493,7 @@ var filteredImage = filter.apply(inputImage);
 </code></pre>
 
 </div></section>
-<section class="slide code10" id="section-9"><div><h2>Комбинация фильтров</h2>
+<section class="slide code10" id="section-11"><div><h2>Комбинация фильтров</h2>
 
 <pre><code>&lt;filter id="f2"&gt;
   &lt;feGaussianBlur result="a1" stdDeviation="3" /&gt;
@@ -403,7 +503,7 @@ var filteredImage = filter.apply(inputImage);
 </code></pre>
 
 </div></section>
-<section class="slide code10" id="section-10"><div><h2>Комбинация фильтров</h2>
+<section class="slide code10" id="section-12"><div><h2>Комбинация фильтров</h2>
 
 <pre><code>&lt;filter id="f2"&gt;
   &lt;feGaussianBlur <mark>result="<mark>a1</mark>"</mark> stdDeviation="3" /&gt;
@@ -413,7 +513,7 @@ var filteredImage = filter.apply(inputImage);
 </code></pre>
 
 </div></section>
-<section class="slide cover w h headerlabel" id="section-11"><div><h2>Комбинация фильтров</h2>
+<section class="slide cover w h headerlabel" id="section-13"><div><h2>Комбинация фильтров</h2>
 
 <svg width="1024" height="768">
   <defs>
@@ -512,9 +612,9 @@ var filteredImage = filter.apply(inputImage);
 <section class="slide code10" id="fecomponenttransfer-7"><div><h2>feComponentTransfer</h2>
 
 <pre><code>&lt;feComponentTransfer&gt;
- &lt;feFuncR type="linear" slope="10" intercept="-4"/&gt;
- &lt;feFuncG type="linear" slope="1.5" intercept="1"/&gt;
- &lt;feFuncB type="linear" slope="2" intercept="-1"/&gt;
+  &lt;feFuncR type="<mark>linear</mark>" slope="10" intercept="-4"/&gt;
+  &lt;feFuncG type="<mark>linear</mark>" slope="1.5" intercept="1"/&gt;
+  &lt;feFuncB type="<mark>linear</mark>" slope="2" intercept="-1"/&gt;
 &lt;/feComponentTransfer&gt;
 </code></pre>
 
@@ -537,9 +637,9 @@ var filteredImage = filter.apply(inputImage);
 </div></section>
 <section class="slide code10" id="fecomponenttransfer-9"><div><h2>feComponentTransfer</h2>
 <pre><code>&lt;feComponentTransfer&gt;
-  &lt;<mark>feFunc<mark>R</mark></mark> <mark>type="<mark>discrete</mark>"</mark> <mark>tableValues="<mark>0 0.5 1</mark>"</mark> /&gt;
-  &lt;<mark>feFunc<mark>G</mark></mark> <mark>type="<mark>discrete</mark>"</mark> <mark>tableValues="<mark>0 0.5 1</mark>"</mark> /&gt;
-  &lt;<mark>feFunc<mark>B</mark></mark> <mark>type="<mark>discrete</mark>"</mark> <mark>tableValues="<mark>0 0.5 1</mark>"</mark> /&gt;
+  &lt;feFuncR type="<mark>discrete</mark>" tableValues="0 0.5 1"/&gt;
+  &lt;feFuncG type="<mark>discrete</mark>" tableValues="0 0.5 1"/&gt;
+  &lt;feFuncB type="<mark>discrete</mark>" tableValues="0 0.5 1"/&gt;
 &lt;/feComponentTransfer&gt;
 </code></pre>
 
@@ -562,9 +662,9 @@ var filteredImage = filter.apply(inputImage);
 </div></section>
 <section class="slide code11" id="fecomponenttransfer-11"><div><h2>feComponentTransfer</h2>
 <pre><code>&lt;feComponentTransfer&gt;
-  &lt;<mark>feFunc<mark>R</mark></mark> <mark>type="<mark>table</mark>"</mark> <mark>tableValues="<mark>1 0</mark>"</mark> /&gt;
-  &lt;<mark>feFunc<mark>G</mark></mark> <mark>type="<mark>table</mark>"</mark> <mark>tableValues="<mark>1 0</mark>"</mark> /&gt;
-  &lt;<mark>feFunc<mark>B</mark></mark> <mark>type="<mark>table</mark>"</mark> <mark>tableValues="<mark>1 0</mark>"</mark> /&gt;
+  &lt;feFuncR type="<mark>table</mark>" tableValues="1 0"/&gt;
+  &lt;feFuncG type="<mark>table</mark>" tableValues="1 0"/&gt;
+  &lt;feFuncB type="<mark>table</mark>" tableValues="1 0"/&gt;
 &lt;/feComponentTransfer&gt;
 </code></pre>
 
@@ -585,10 +685,14 @@ var filteredImage = filter.apply(inputImage);
 </svg>
 
 </div></section>
-<section class="slide code13" id="fecomponenttransfer-13"><div><h2>feComponentTransfer</h2>
+<section class="slide code10" id="fecomponenttransfer-13"><div><h2>feComponentTransfer</h2>
 <pre><code>&lt;feComponentTransfer&gt;
-  &lt;<mark>feFuncR</mark> <mark>type="gamma"</mark> 
-  amplitude="2" exponent="0.5" offset="0.2"/&gt;
+  &lt;feFuncR 
+    type="<mark>gamma</mark>" 
+    amplitude="2" 
+    exponent="0.5" 
+    offset="0.2"
+  /&gt;
 &lt;/feComponentTransfer&gt;
 </code></pre>
 
@@ -610,127 +714,17 @@ var filteredImage = filter.apply(inputImage);
 <section class="slide shout" id="fecolormatrix"><div><h2>feColorMatrix</h2>
 
 </div></section>
-<section class="slide code12 codecenter cover w h headerlabel" id="fecolormatrix-1"><div><h2>feColorMatrix</h2>
+<section class="slide code13" id="fecolormatrix-1"><div><h2>feColorMatrix</h2>
 
-<pre><code>&lt;<mark>feColorMatrix</mark> <mark>type="<mark>saturate</mark>"</mark> <mark>values="<mark>0</mark>"</mark> /&gt;
+<pre><code>| R' |     | a00 a01 a02 a03 a04 |   | R |
+| G' |     | a10 a11 a12 a13 a14 |   | G |
+| B' |  =  | a20 a21 a22 a23 a24 | * | B |
+| A' |     | a30 a31 a32 a33 a34 |   | A |
+| 1  |     |  0   0   0   0   1  |   | 1 |
 </code></pre>
 
-<svg class="cover" width="1024" height="768">
-  <defs>
-      <filter id="f60">
-        <fecolormatrix type="saturate" values="0" />
-      </filter>
-  </defs>
-  <image filter="url(#f60)" xlink:href="img/girl.jpg" width="100%" height="100%" preserveaspectratio="xMidYMid meet" />
-</svg>
-
 </div></section>
-<section class="slide code12 codecenter cover w h headerlabel" id="fecolormatrix-2"><div><h2>feColorMatrix</h2>
-
-<pre><code>&lt;<mark>feColorMatrix</mark> <mark>type="<mark>saturate</mark>"</mark> <mark>values="<mark>4</mark>"</mark> /&gt;
-</code></pre>
-
-<svg class="cover" width="1024" height="768">
-  <defs>
-      <filter id="f61">
-        <fecolormatrix type="saturate" values="4" />
-      </filter>
-  </defs>
-  <image filter="url(#f61)" xlink:href="img/girl.jpg" width="100%" height="100%" preserveaspectratio="xMidYMid meet" />
-</svg>
-
-</div></section>
-<section class="slide code12 codecenter cover w h headerlabel" id="fecolormatrix-3"><div><h2>feColorMatrix</h2>
-
-<pre><code>&lt;<mark>feColorMatrix</mark> <mark>type="<mark>saturate</mark>"</mark> <mark>values="<mark>50</mark>"</mark> /&gt;
-</code></pre>
-
-<svg class="cover" width="1024" height="768">
-  <defs>
-      <filter id="f62">
-        <fecolormatrix type="saturate" values="50" />
-      </filter>
-  </defs>
-  <image filter="url(#f62)" xlink:href="img/girl.jpg" width="100%" height="100%" preserveaspectratio="xMidYMid meet" />
-</svg>
-
-</div></section>
-<section class="slide code11 codecenter cover w h headerlabel" id="fecolormatrix-4"><div><h2>feColorMatrix</h2>
-
-<pre><code>&lt;<mark>feColorMatrix</mark> <mark>type="<mark>hueRotate</mark>"</mark> <mark>values="<mark>0</mark>"</mark> /&gt;
-</code></pre>
-
-<svg class="cover" width="1024" height="768">
-  <defs>
-      <filter id="f70">
-        <fecolormatrix type="hueRotate" values="0" />
-      </filter>
-  </defs>
-  <image filter="url(#f70)" xlink:href="img/girl.jpg" width="100%" height="100%" preserveaspectratio="xMidYMid meet" />
-</svg>
-
-</div></section>
-<section class="slide code11 codecenter cover w h headerlabel" id="fecolormatrix-5"><div><h2>feColorMatrix</h2>
-
-<pre><code>&lt;<mark>feColorMatrix</mark> <mark>type="<mark>hueRotate</mark>"</mark> <mark>values="<mark>120</mark>"</mark> /&gt;
-</code></pre>
-
-<svg class="cover" width="1024" height="768">
-  <defs>
-      <filter id="f71">
-        <fecolormatrix type="hueRotate" values="120" />
-      </filter>
-  </defs>
-  <image filter="url(#f71)" xlink:href="img/girl.jpg" width="100%" height="100%" preserveaspectratio="xMidYMid meet" />
-</svg>
-
-</div></section>
-<section class="slide code11 codecenter cover w h headerlabel" id="fecolormatrix-6"><div><h2>feColorMatrix</h2>
-
-<pre><code>&lt;<mark>feColorMatrix</mark> <mark>type="<mark>hueRotate</mark>"</mark> <mark>values="<mark>240</mark>"</mark> /&gt;
-</code></pre>
-
-<svg class="cover" width="1024" height="768">
-  <defs>
-      <filter id="f72">
-        <fecolormatrix type="hueRotate" values="240" />
-      </filter>
-  </defs>
-  <image filter="url(#f72)" xlink:href="img/girl.jpg" width="100%" height="100%" preserveaspectratio="xMidYMid meet" />
-</svg>
-
-</div></section>
-<section class="slide code11 codecenter cover w h headerlabel" id="fecolormatrix-7"><div><h2>feColorMatrix</h2>
-
-<pre><code>&lt;<mark>feColorMatrix</mark> <mark>type="<mark>hueRotate</mark>"</mark> <mark>values="<mark>320</mark>"</mark> /&gt;
-</code></pre>
-
-<svg class="cover" width="1024" height="768">
-  <defs>
-      <filter id="f73">
-        <fecolormatrix type="hueRotate" values="320" />
-      </filter>
-  </defs>
-  <image filter="url(#f73)" xlink:href="img/girl.jpg" width="100%" height="100%" preserveaspectratio="xMidYMid meet" />
-</svg>
-
-</div></section>
-<section class="slide code12 codecenter cover w h headerlabel" id="fecolormatrix-8"><div><h2>feColorMatrix</h2>
-
-<pre><code>&lt;<mark>feColorMatrix</mark> <mark>type="<mark>luminanceToAlpha</mark>"</mark> /&gt;
-</code></pre>
-
-<svg style="background:url('img/transp.png')" class="cover" width="1024" height="768">
-  <defs>
-      <filter id="f74">
-        <fecolormatrix type="luminanceToAlpha" />
-      </filter>
-  </defs>
-  <image filter="url(#f74)" xlink:href="img/girl.jpg" width="100%" height="100%" preserveaspectratio="xMidYMid meet" />
-</svg>
-
-</div></section>
-<section class="slide code12" id="fecolormatrix-9"><div><h2>feColorMatrix</h2>
+<section class="slide code12" id="fecolormatrix-2"><div><h2>feColorMatrix</h2>
 
 <pre><code>&lt;feColorMatrix 
 type="<mark>matrix</mark>"
@@ -743,17 +737,7 @@ values="
 </code></pre>
 
 </div></section>
-<section class="slide code13" id="fecolormatrix-10"><div><h2>feColorMatrix</h2>
-
-<pre><code>| R' |     | a00 a01 a02 a03 a04 |   | R |
-| G' |     | a10 a11 a12 a13 a14 |   | G |
-| B' |  =  | a20 a21 a22 a23 a24 | * | B |
-| A' |     | a30 a31 a32 a33 a34 |   | A |
-| 1  |     |  0   0   0   0   1  |   | 1 |
-</code></pre>
-
-</div></section>
-<section class="slide cover w h headerlabel" id="fecolormatrix-11"><div><h2>feColorMatrix</h2>
+<section class="slide cover w h headerlabel" id="fecolormatrix-3"><div><h2>feColorMatrix</h2>
 
 <svg class="cover" width="1024" height="768">
   <defs>
@@ -765,7 +749,7 @@ values="
 </svg>
 
 </div></section>
-<section class="slide cover w h headerlabel" id="fecolormatrix-12"><div><h2>feColorMatrix</h2>
+<section class="slide cover w h headerlabel" id="fecolormatrix-4"><div><h2>feColorMatrix</h2>
 
 <svg class="cover" width="1024" height="768">
   <defs>
@@ -780,18 +764,147 @@ values="
 </svg>
 
 </div></section>
-<section class="slide cover w h headerlabel" id="fecolormatrix-13"><div><h2>feColorMatrix</h2>
+<section class="slide cover w h headerlabel" id="fecolormatrix-5"><div><h2>feColorMatrix</h2>
 
 <svg class="cover" width="1024" height="768">
   <defs>
     <filter id="f76">
 <fecolormatrix in="SourceGraphic" type="matrix" values="1.2 0 0 0 -0.2 
-                                                              2 0 2 2 -0.2 
-                                                              2 2 1.2 0 -0.2
-                                                              2 0 0 1 0" />
+                                                        2   0 2 2 -0.2 
+                                                        2   2 1.2 0 -0.2
+                                                        2   0 0 1 0" />
     </filter>
   </defs>
   <image filter="url(#f76)" xlink:href="img/girl.jpg" width="100%" height="100%" preserveaspectratio="xMidYMid meet" />
+</svg>
+
+</div></section>
+<section class="slide cover w matrix" id="section-14"><div><h2>Умножать на матрицу, что-бы сделать картинку чёрно-белой? о_О</h2>
+
+<p><img src="img/matrix.gif" /></p>
+
+</div></section>
+<section class="slide code12 codecenter cover w h headerlabel" id="fecolormatrix-6"><div><h2>feColorMatrix</h2>
+
+<pre><code>&lt;feColorMatrix type="<mark>saturate</mark>" values="<mark>0</mark>" /&gt;
+</code></pre>
+
+<svg class="cover" width="1024" height="768">
+  <defs>
+      <filter id="f60">
+        <fecolormatrix type="saturate" values="0" />
+      </filter>
+  </defs>
+  <image filter="url(#f60)" xlink:href="img/girl.jpg" width="100%" height="100%" preserveaspectratio="xMidYMid meet" />
+</svg>
+
+</div></section>
+<section class="slide code12 codecenter cover w h headerlabel" id="fecolormatrix-7"><div><h2>feColorMatrix</h2>
+
+<pre><code>&lt;feColorMatrix type="<mark>saturate</mark>" values="<mark>4</mark>" /&gt;
+</code></pre>
+
+<svg class="cover" width="1024" height="768">
+  <defs>
+      <filter id="f61">
+        <fecolormatrix type="saturate" values="4" />
+      </filter>
+  </defs>
+  <image filter="url(#f61)" xlink:href="img/girl.jpg" width="100%" height="100%" preserveaspectratio="xMidYMid meet" />
+</svg>
+
+</div></section>
+<section class="slide code12 codecenter cover w h headerlabel" id="fecolormatrix-8"><div><h2>feColorMatrix</h2>
+
+<pre><code>&lt;feColorMatrix type="<mark>saturate</mark>" values="<mark>50</mark>" /&gt;
+</code></pre>
+
+<svg class="cover" width="1024" height="768">
+  <defs>
+      <filter id="f62">
+        <fecolormatrix type="saturate" values="50" />
+      </filter>
+  </defs>
+  <image filter="url(#f62)" xlink:href="img/girl.jpg" width="100%" height="100%" preserveaspectratio="xMidYMid meet" />
+</svg>
+
+</div></section>
+<section class="slide code11 codecenter cover w h headerlabel" id="fecolormatrix-9"><div><h2>feColorMatrix</h2>
+
+<pre><code>&lt;feColorMatrix type="<mark>hueRotate</mark>" values="<mark>0</mark>" /&gt;
+</code></pre>
+
+<svg class="cover" width="1024" height="768">
+  <defs>
+      <filter id="f70">
+        <fecolormatrix type="hueRotate" values="0" />
+
+      </filter>
+  </defs>
+  <image filter="url(#f70)" xlink:href="img/girl.jpg" width="100%" height="100%" preserveaspectratio="xMidYMid meet" />
+</svg>
+
+</div></section>
+<section class="slide code11 codecenter cover w h headerlabel" id="fecolormatrix-10"><div><h2>feColorMatrix</h2>
+
+<pre><code>&lt;feColorMatrix type="<mark>hueRotate</mark>" values="<mark>120</mark>" /&gt;
+</code></pre>
+
+<svg class="cover" width="1024" height="768">
+  <defs>
+      <filter id="f71">
+        <fecolormatrix type="hueRotate" values="120" />
+        <fecolormatrix type="saturate" values="2" />
+      </filter>
+  </defs>
+  <image filter="url(#f71)" xlink:href="img/girl.jpg" width="100%" height="100%" preserveaspectratio="xMidYMid meet" />
+</svg>
+
+</div></section>
+<section class="slide code11 codecenter cover w h headerlabel" id="fecolormatrix-11"><div><h2>feColorMatrix</h2>
+
+<pre><code>&lt;feColorMatrix type="<mark>hueRotate</mark>" values="<mark>240</mark>" /&gt;
+</code></pre>
+
+<svg class="cover" width="1024" height="768">
+  <defs>
+      <filter id="f72">
+        <fecolormatrix type="hueRotate" values="240" />
+        <fecolormatrix type="saturate" values="2" />
+      </filter>
+  </defs>
+  <image filter="url(#f72)" xlink:href="img/girl.jpg" width="100%" height="100%" preserveaspectratio="xMidYMid meet" />
+</svg>
+
+</div></section>
+<section class="slide code11 codecenter cover w h headerlabel" id="fecolormatrix-12"><div><h2>feColorMatrix</h2>
+
+<pre><code>&lt;feColorMatrix type="<mark>hueRotate</mark>" values="<mark>320</mark>" /&gt;
+</code></pre>
+
+<svg class="cover" width="1024" height="768">
+  <defs>
+      <filter id="f73">
+        <fecolormatrix type="hueRotate" values="320" />
+        <fecolormatrix type="saturate" values="2" />
+      </filter>
+  </defs>
+  <image filter="url(#f73)" xlink:href="img/girl.jpg" width="100%" height="100%" preserveaspectratio="xMidYMid meet" />
+</svg>
+
+</div></section>
+<section class="slide code12 codecenter cover w h headerlabel" id="fecolormatrix-13"><div><h2>feColorMatrix</h2>
+
+<pre><code>&lt;feColorMatrix type="<mark>luminanceToAlpha</mark>" /&gt;
+</code></pre>
+
+<svg style="background:url('img/transp.png')" class="cover" width="1024" height="768">
+  <defs>
+      <filter id="f74">
+        <fecolormatrix type="luminanceToAlpha" />
+      </filter>
+  </defs>
+  <image filter="url(#f74)" xlink:href="img/girl.jpg" width="100%" height="100%" preserveaspectratio="xMidYMid meet" />
 </svg>
 
 </div></section>
@@ -800,8 +913,8 @@ values="
 </div></section>
 <section class="slide code14 codecenter" id="feconvolvematrix-1"><div><h2>feConvolveMatrix</h2>
 
-<pre><code>&lt;<mark>feConvolveMatrix</mark> <mark>order="<mark>3</mark>"</mark>
-<mark>kernelMatrix="<mark>1 -1  1 -1 -1 -1 1 -1 1</mark>"</mark>/&gt;
+<pre><code>&lt;feConvolveMatrix <mark>order="3"</mark>
+kernelMatrix="1 -1  1 -1 -1 -1 1 -1 1"/&gt;
 
  1    -1     1 
 -1    -1    -1 
@@ -809,7 +922,10 @@ values="
 </code></pre>
 
 </div></section>
-<section class="slide cover w h headerlabel" id="classic-selfish-duckface"><div><h2>Classic #selfish #duckface</h2>
+<section class="slide cover w h headerlabel codecenter" id="classic-selfish-duckface"><div><h2>Classic #selfish #duckface</h2>
+
+<pre><code>Classic #selfish #duckface
+</code></pre>
 
 <svg class="cover" width="1024" height="768">
   <defs>
@@ -819,7 +935,10 @@ values="
 </svg>
 
 </div></section>
-<section class="slide cover w h headerlabel" id="fixed-selfish-duckface"><div><h2>Fixed #selfish #duckface</h2>
+<section class="slide cover w h headerlabel codecenter" id="fixed-selfish-duckface"><div><h2>Fixed #selfish #duckface</h2>
+
+<pre><code>Fixed #selfish #duckface
+</code></pre>
 
 <svg class="cover" width="1024" height="768">
   <defs>
@@ -889,6 +1008,7 @@ kernelMatrix="<mark>1 1 1 1 1 1 -2 -2 -2 1 1 -2 0 -2 1 1 -2 -2 -2 1 1 1 1 1 1</m
   <defs>
     <filter id="f86">
       <feconvolvematrix order="5" kernelmatrix="1 1 1 1 1 1 -2 -2 -2 1 1  -2 .01 -2 1 1 -2 -2 -2 1 1 1 1 1 1" />
+      <fecolormatrix type="saturate" values="0" />
     </filter>
   </defs>
   <image filter="url(#f86)" xlink:href="img/duck.jpg" width="100%" height="100%" preserveaspectratio="xMidYMid meet" />
@@ -901,9 +1021,9 @@ kernelMatrix="<mark>1 1 1 1 1 1 -2 -2 -2 1 1 -2 0 -2 1 1 -2 -2 -2 1 1 1 1 1 1</m
 <section class="slide code17" id="fecomposite-1"><div><h2>feComposite</h2>
 
 <pre><code>&lt;feComposite 
-    <mark>in="<mark>source1</mark>"</mark> 
-    <mark>in2="<mark>source2</mark>"</mark>
-    <mark>operator="<mark>xor</mark>"</mark>/&gt;
+    in="<mark>source1</mark>"
+    in2="<mark>source2</mark>"
+    operator="<mark>xor</mark>"/&gt;
 </code></pre>
 
 </div></section>
@@ -1020,9 +1140,9 @@ kernelMatrix="<mark>1 1 1 1 1 1 -2 -2 -2 1 1 -2 0 -2 1 1 -2 -2 -2 1 1 1 1 1 1</m
 <section class="slide code17" id="feblend-1"><div><h2>feBlend</h2>
 
 <pre><code>&lt;feBlend 
-    <mark>in="<mark>source1</mark>"</mark> 
-    <mark>in2="<mark>source2</mark>"</mark>
-    <mark>mode="<mark>lighten</mark>"</mark>/&gt;
+    in="<mark>source1</mark>"
+    in2="<mark>source2</mark>"
+    mode="<mark>lighten</mark>"/&gt;
 </code></pre>
 
 </div></section>
@@ -1165,7 +1285,7 @@ kernelMatrix="<mark>1 1 1 1 1 1 -2 -2 -2 1 1 -2 0 -2 1 1 -2 -2 -2 1 1 1 1 1 1</m
            <fefuncg type="linear" slope="0" />
            <fefuncb type="linear" slope="0" />
         </fecomponenttransfer>
-        <fedisplacementmap in="redOut" in2="map" result="redRotateOut" scale="60" xchannelselector="R" ychannelselector="G" />
+        <fedisplacementmap in="redOut" in2="map" result="redRotateOut" scale="40" xchannelselector="R" ychannelselector="G" />
 
         <!--green-->
 
@@ -1183,7 +1303,7 @@ kernelMatrix="<mark>1 1 1 1 1 1 -2 -2 -2 1 1 -2 0 -2 1 1 -2 -2 -2 1 1 1 1 1 1</m
            <fefuncg type="linear" slope="0" />
            <fefuncb type="linear" slope="1" />
         </fecomponenttransfer>
-        <fedisplacementmap in="blueOut" in2="map" result="blueRotateOut" scale="-60" xchannelselector="R" ychannelselector="G" />
+        <fedisplacementmap in="blueOut" in2="map" result="blueRotateOut" scale="-40" xchannelselector="R" ychannelselector="G" />
 
         <!--merge-->
 
@@ -1196,7 +1316,7 @@ kernelMatrix="<mark>1 1 1 1 1 1 -2 -2 -2 1 1 -2 0 -2 1 1 -2 -2 -2 1 1 1 1 1 1</m
 </svg>
 
 </div></section>
-<section class="slide code10 center" id="section-12"><div><h2>Красный канал. 20 градусов</h2>
+<section class="slide code10 center" id="section-15"><div><h2>Красный канал. 20 градусов</h2>
 
 <svg width="550" height="550">
     <defs>
@@ -1214,7 +1334,7 @@ kernelMatrix="<mark>1 1 1 1 1 1 -2 -2 -2 1 1 -2 0 -2 1 1 -2 -2 -2 1 1 1 1 1 1</m
            <fefuncg type="linear" slope="0" />
            <fefuncb type="linear" slope="0" />
         </fecomponenttransfer>
-        <fedisplacementmap in="redOut" in2="map" result="redRotateOut" scale="60" xchannelselector="R" ychannelselector="G" />
+        <fedisplacementmap in="redOut" in2="map" result="redRotateOut" scale="40" xchannelselector="R" ychannelselector="G" />
 
        
 
@@ -1242,7 +1362,7 @@ kernelMatrix="<mark>1 1 1 1 1 1 -2 -2 -2 1 1 -2 0 -2 1 1 -2 -2 -2 1 1 1 1 1 1</m
            <fefuncg type="linear" slope="0" />
            <fefuncb type="linear" slope="1" />
         </fecomponenttransfer>
-        <fedisplacementmap in="blueOut" in2="map" result="blueRotateOut" scale="-60" xchannelselector="R" ychannelselector="G" />
+        <fedisplacementmap in="blueOut" in2="map" result="blueRotateOut" scale="-40" xchannelselector="R" ychannelselector="G" />
 
       </filter>
     </defs>
@@ -1250,7 +1370,7 @@ kernelMatrix="<mark>1 1 1 1 1 1 -2 -2 -2 1 1 -2 0 -2 1 1 -2 -2 -2 1 1 1 1 1 1</m
 </svg>
 
 </div></section>
-<section class="slide code17 center" id="section-13"><div><h2>+ Неподвижный зеленый</h2>
+<section class="slide code17 center" id="section-16"><div><h2>+ Неподвижный зеленый</h2>
 
 <svg width="550" height="550">
     <defs>
@@ -1268,7 +1388,7 @@ kernelMatrix="<mark>1 1 1 1 1 1 -2 -2 -2 1 1 -2 0 -2 1 1 -2 -2 -2 1 1 1 1 1 1</m
            <fefuncg type="linear" slope="0" />
            <fefuncb type="linear" slope="0" />
         </fecomponenttransfer>
-        <fedisplacementmap in="redOut" in2="map" result="redRotateOut" scale="60" xchannelselector="R" ychannelselector="G" />
+        <fedisplacementmap in="redOut" in2="map" result="redRotateOut" scale="40" xchannelselector="R" ychannelselector="G" />
 
         <!--green-->
 
@@ -1286,7 +1406,7 @@ kernelMatrix="<mark>1 1 1 1 1 1 -2 -2 -2 1 1 -2 0 -2 1 1 -2 -2 -2 1 1 1 1 1 1</m
            <fefuncg type="linear" slope="0" />
            <fefuncb type="linear" slope="1" />
         </fecomponenttransfer>
-        <fedisplacementmap in="blueOut" in2="map" result="blueRotateOut" scale="-60" xchannelselector="R" ychannelselector="G" />
+        <fedisplacementmap in="blueOut" in2="map" result="blueRotateOut" scale="-40" xchannelselector="R" ychannelselector="G" />
 
         <!--merge-->
 
@@ -1312,29 +1432,29 @@ kernelMatrix="<mark>1 1 1 1 1 1 -2 -2 -2 1 1 -2 0 -2 1 1 -2 -2 -2 1 1 1 1 1 1</m
     <defs>
       <filter id="dpmap7" x="-20%" y="-20%" width="140%" height="140%" filterunits="objectBoundingBox" primitiveunits="userSpaceOnUse">
         <feimage result="map" xlink:href="img/sphere.png" />
-        <feoffset in="map" result="map1" dx="20" dy="60" />
-        <fedisplacementmap in="SourceGraphic" in2="map1" result="res1" scale="190" xchannelselector="R" ychannelselector="G" />
+        <feoffset in="map" result="map1" dx="20" dy="90" />
+        <fedisplacementmap in="SourceGraphic" in2="map1" result="res1" scale="220" xchannelselector="R" ychannelselector="G" />
       </filter>
     </defs>
     <image filter="url(#dpmap7)" id="resultImg" width="100%" height="100%" xlink:href="img/happyface.png" />
 </svg>
 
 </div></section>
-<section class="slide code17 center" id="happy-face-2"><div><h2>Happy face</h2>
+<section class="slide code17 center" id="happy-face-lvl-40"><div><h2>Happy face lvl 40</h2>
 
 <svg width="550" height="550">
     <defs>
       <filter id="dpmap8" x="-20%" y="-20%" width="140%" height="140%" filterunits="objectBoundingBox" primitiveunits="userSpaceOnUse">
         <feimage result="map" xlink:href="img/sphere.png" />
-        <feoffset in="map" result="map1" dx="-10" dy="-45" />
-        <fedisplacementmap in="SourceGraphic" in2="map1" result="res1" scale="180" xchannelselector="R" ychannelselector="G" />
+        <feoffset in="map" result="map1" dx="-10" dy="-100" />
+        <fedisplacementmap in="SourceGraphic" in2="map1" result="res1" scale="300" xchannelselector="R" ychannelselector="G" />
       </filter>
     </defs>
     <image filter="url(#dpmap8)" id="resultImg" width="100%" height="100%" xlink:href="img/happyface.png" />
 </svg>
 
 </div></section>
-<section class="slide code17 center" id="happy-face-3"><div><h2>Happy face</h2>
+<section class="slide code17 center" id="happy-face-lvl80"><div><h2>Happy face lvl80</h2>
 
 <svg width="550" height="550">
     <defs>
@@ -1350,40 +1470,39 @@ kernelMatrix="<mark>1 1 1 1 1 1 -2 -2 -2 1 1 -2 0 -2 1 1 -2 -2 -2 1 1 1 1 1 1</m
 </svg>
 
 </div></section>
-<section class="slide code17 center" id="happy-face-4"><div><h2>Happy face</h2>
-
-<svg width="550" height="550">
-    <defs>
-      <filter id="dpmap85" x="-20%" y="-20%" width="140%" height="140%" filterunits="objectBoundingBox" primitiveunits="userSpaceOnUse">
-        <feimage result="map" xlink:href="img/sphere.png" />
-        <feoffset in="map" result="map1" dx="-10" dy="-45" />
-        <fedisplacementmap id="zzz1" in="SourceGraphic" in2="map1" result="res1" scale="0" xchannelselector="R" ychannelselector="G">
-          <animate xlink:href="#zzz1" xmlns="http://www.w3.org/2000/svg" attributename="scale" values="0;180;0" dur="2s" repeatcount="indefinite" />  
-        </fedisplacementmap>
-                   
-      </filter>
-    </defs>
-    <image filter="url(#dpmap85)" id="resultImg" width="100%" height="100%" xlink:href="img/happyface.png" />
-</svg>
+<section class="slide shout" id="section-17"><div><h2>Возможности анимации</h2>
 
 </div></section>
-<section class="slide shout" id="section-14"><div><h2>Возможности анимации</h2>
+<section class="slide code13" id="svg-"><div><h2>Синтаксис для SVG анимаций</h2>
 
-</div></section>
-<section class="slide code13" id="section-15"><div><h2>Синтаксис</h2>
+<pre><code>&lt;feColorMatrix type="saturate" <mark>values="0.2"</mark>&gt;
 
-<pre><code>&lt;feColorMatrix type="saturate" <mark>values</mark>="0"&gt;
-  &lt;animate <mark>attributeName="<mark>values</mark>"</mark>/&gt;
 &lt;/feColorMatrix&gt;
 </code></pre>
 
 </div></section>
-<section class="slide code13" id="section-16"><div><h2>Синтаксис</h2>
+<section class="slide code13" id="svg--1"><div><h2>Синтаксис для SVG анимаций</h2>
 
-<pre><code>&lt;feColorMatrix type="saturate" <mark>values</mark>="0"&gt;
+<pre><code>&lt;feColorMatrix type="saturate" values="0.2"&gt;
+  &lt;animate <mark>attributeName</mark>="values" /&gt;
+&lt;/feColorMatrix&gt;
+</code></pre>
+
+</div></section>
+<section class="slide code13" id="svg--2"><div><h2>Синтаксис для SVG анимаций</h2>
+
+<pre><code>&lt;feColorMatrix type="saturate" <mark>values</mark>="0.2"&gt;
+  &lt;animate attributeName="<mark>values</mark>" /&gt;
+&lt;/feColorMatrix&gt;
+</code></pre>
+
+</div></section>
+<section class="slide code13" id="svg--3"><div><h2>Синтаксис для SVG анимаций</h2>
+
+<pre><code>&lt;feColorMatrix type="saturate" <mark>values</mark>="0.2"&gt;
   &lt;animate 
     <mark>attributeName="<mark>values</mark>"</mark> 
-    <mark>values="<mark>0;2;0</mark>"</mark>
+    <mark>values="<mark>0;5;0</mark>"</mark>
     <mark>dur="<mark>2s</mark>"</mark> 
     <mark>repeatCount="<mark>indefinite</mark>"</mark>/&gt;
 &lt;/feColorMatrix&gt;
@@ -1396,7 +1515,7 @@ kernelMatrix="<mark>1 1 1 1 1 1 -2 -2 -2 1 1 -2 0 -2 1 1 -2 -2 -2 1 1 1 1 1 1</m
   <defs>
     <filter id="fanim1">
       <fecolormatrix type="saturate" in="SourceGraphic">
-        <animate attributename="values" values="0;2;0" dur="2s" repeatcount="indefinite" />
+        <animate attributename="values" values="0;5;0" dur="2s" repeatcount="indefinite" />
       </fecolormatrix>
     </filter>
   </defs>
@@ -1439,14 +1558,14 @@ kernelMatrix="<mark>1 1 1 1 1 1 -2 -2 -2 1 1 -2 0 -2 1 1 -2 -2 -2 1 1 1 1 1 1</m
 <p><img src="img/hipstagirl.jpg" alt="" /></p>
 
 </div></section>
-<section class="slide cover w h headerlabel" id="section-17"><div><h2>Вновь девушка</h2>
+<section class="slide cover w h headerlabel" id="section-18"><div><h2>Вновь девушка</h2>
 
 <svg width="1024" height="768">
     <image xlink:href="img/girl.jpg" width="100%" height="100%" preserveaspectratio="xMidYMid meet" />
 </svg>
 
 </div></section>
-<section class="slide cover w h headerlabel" id="section-18"><div><h2>1) Подчеркнем темные области</h2>
+<section class="slide cover w h headerlabel" id="section-19"><div><h2>1) Подчеркнем темные области</h2>
 
 <svg width="1024" height="768">
     <defs>
@@ -1472,7 +1591,7 @@ kernelMatrix="<mark>1 1 1 1 1 1 -2 -2 -2 1 1 -2 0 -2 1 1 -2 -2 -2 1 1 1 1 1 1</m
 
             <!-- Blur-all-except face -->
             <fediffuselighting result="diffOut" diffuseconstant="1" lighting-color="white">
-              <fespotlight id="spotlight" x="0" y="0" z="300" pointsatx="100" pointsaty="150" pointsatz="80" specularexponent="2" limitingconeangle="27"></fespotlight>
+              <fespotlight id="spotlight" x="0" y="0" z="300" pointsatx="100" pointsaty="150" pointsatz="200" specularexponent="2" limitingconeangle="27"></fespotlight>
             </fediffuselighting>
             <fecolormatrix in="diffOut" result="alphaMap" type="luminanceToAlpha"></fecolormatrix>
             <fecomponenttransfer in="alphaMap" result="invertlight">
@@ -1488,7 +1607,7 @@ kernelMatrix="<mark>1 1 1 1 1 1 -2 -2 -2 1 1 -2 0 -2 1 1 -2 -2 -2 1 1 1 1 1 1</m
 </svg>
 
 </div></section>
-<section class="slide cover w h headerlabel" id="section-19"><div><h2>3) Уменьшим цветовую насыщенность</h2>
+<section class="slide cover w h headerlabel" id="section-20"><div><h2>3) Уменьшим цветовую насыщенность</h2>
 
 <svg width="1024" height="768">
     <defs>
@@ -1500,7 +1619,7 @@ kernelMatrix="<mark>1 1 1 1 1 1 -2 -2 -2 1 1 -2 0 -2 1 1 -2 -2 -2 1 1 1 1 1 1</m
 
             <!-- Blur-all-except face -->
             <fediffuselighting result="diffOut" diffuseconstant="1" lighting-color="white">
-              <fespotlight id="spotlight" x="0" y="0" z="300" pointsatx="100" pointsaty="150" pointsatz="80" specularexponent="2" limitingconeangle="27"></fespotlight>
+              <fespotlight id="spotlight" x="0" y="0" z="300" pointsatx="100" pointsaty="150" pointsatz="200" specularexponent="2" limitingconeangle="27"></fespotlight>
             </fediffuselighting>
             <fecolormatrix in="diffOut" result="alphaMap" type="luminanceToAlpha"></fecolormatrix>
             <fecomponenttransfer in="alphaMap" result="invertlight">
@@ -1525,7 +1644,7 @@ kernelMatrix="<mark>1 1 1 1 1 1 -2 -2 -2 1 1 -2 0 -2 1 1 -2 -2 -2 1 1 1 1 1 1</m
 </svg>
 
 </div></section>
-<section class="slide cover w h headerlabel" id="section-20"><div><h2>4) Выделяем побольше красного</h2>
+<section class="slide cover w h headerlabel" id="section-21"><div><h2>4) Выделяем побольше красного</h2>
 
 <svg width="1024" height="768">
     <defs>
@@ -1540,7 +1659,7 @@ kernelMatrix="<mark>1 1 1 1 1 1 -2 -2 -2 1 1 -2 0 -2 1 1 -2 -2 -2 1 1 1 1 1 1</m
 
             <!-- Blur-all-except face -->
             <fediffuselighting result="diffOut" diffuseconstant="1" lighting-color="white">
-              <fespotlight id="spotlight" x="0" y="0" z="300" pointsatx="100" pointsaty="150" pointsatz="80" specularexponent="2" limitingconeangle="27"></fespotlight>
+              <fespotlight id="spotlight" x="0" y="0" z="300" pointsatx="100" pointsaty="150" pointsatz="200" specularexponent="2" limitingconeangle="27"></fespotlight>
             </fediffuselighting>
             <fecolormatrix in="diffOut" result="alphaMap" type="luminanceToAlpha"></fecolormatrix>
             <fecomponenttransfer in="alphaMap" result="invertlight">
@@ -1569,7 +1688,7 @@ kernelMatrix="<mark>1 1 1 1 1 1 -2 -2 -2 1 1 -2 0 -2 1 1 -2 -2 -2 1 1 1 1 1 1</m
 </svg>
 
 </div></section>
-<section class="slide cover w h headerlabel" id="section-21"><div><h2>5) Затемнение по контуру</h2>
+<section class="slide cover w h headerlabel" id="section-22"><div><h2>5) Затемнение по контуру</h2>
 
 <svg width="1024" height="768">
     <defs>
@@ -1582,7 +1701,7 @@ kernelMatrix="<mark>1 1 1 1 1 1 -2 -2 -2 1 1 -2 0 -2 1 1 -2 -2 -2 1 1 1 1 1 1</m
 
             <!-- Blur-all-except face -->
             <fediffuselighting result="diffOut" diffuseconstant="1" lighting-color="white">
-              <fespotlight id="spotlight" x="0" y="0" z="300" pointsatx="100" pointsaty="150" pointsatz="80" specularexponent="2" limitingconeangle="27"></fespotlight>
+              <fespotlight id="spotlight" x="0" y="0" z="300" pointsatx="100" pointsaty="150" pointsatz="200" specularexponent="2" limitingconeangle="27"></fespotlight>
             </fediffuselighting>
             <fecolormatrix in="diffOut" result="alphaMap" type="luminanceToAlpha"></fecolormatrix>
             <fecomponenttransfer in="alphaMap" result="invertlight">
@@ -1605,17 +1724,10 @@ kernelMatrix="<mark>1 1 1 1 1 1 -2 -2 -2 1 1 -2 0 -2 1 1 -2 -2 -2 1 1 1 1 1 1</m
                 <fefuncr type="table" id="redChannel-0" tablevalues="0.0000, 0.2897, 0.6069, 0.7897, 0.8965, 0.9828, 1.0000" />
             </fecomponenttransfer>
 
-            <!--Spotlight-->
-            <feflood id="rc" result="blackfield-0" x="0%" y="0%" width="100%" height="100%" in="SourceGraphic" flood-color="#000000" flood-opacity="1"></feflood>
-            <fespecularlighting id="specular-0" result="Spotlight-0" lighting-color="#FFFFFF" surfacescale="1" specularconstant="1" specularexponent="50">
-              <fepointlight id="pointlight-0" x="100" y="200" z="500"></fepointlight>
-            </fespecularlighting><feblend id="svg-31" result="A-0" in="blackfield-0" in2="Spotlight-0" mode="lighten"></feblend>
-            <feblend id="blend-0" result="ee" in="A-0" in2="rr" mode="multiply"></feblend>
 
+            <feimage xlink:href="img/oldpaper.jpg" preserveaspectratio="none" result="texture1-res" />
+            <feblend id="blend-1" result="ee1" in="rr" in2="texture1-res" mode="screen"></feblend>
 
-
-            <feimage xlink:href="img/texture1.png" result="texture1-res" preserveaspectratio="none" />
-            <feblend id="blend-1" result="ee1" in="ee" in2="texture1-res" mode="screen"></feblend>
 
                     </filter>
     </defs>
@@ -1623,7 +1735,7 @@ kernelMatrix="<mark>1 1 1 1 1 1 -2 -2 -2 1 1 -2 0 -2 1 1 -2 -2 -2 1 1 1 1 1 1</m
 </svg>
 
 </div></section>
-<section class="slide cover w h headerlabel" id="section-22"><div><h2>6) Подмешиваем текстуру</h2>
+<section class="slide cover w h headerlabel" id="section-23"><div><h2>6) Подмешиваем текстуру</h2>
 
 <svg width="1024" height="768">
     <defs>
@@ -1636,7 +1748,7 @@ kernelMatrix="<mark>1 1 1 1 1 1 -2 -2 -2 1 1 -2 0 -2 1 1 -2 -2 -2 1 1 1 1 1 1</m
 
             <!-- Blur-all-except face -->
             <fediffuselighting result="diffOut" diffuseconstant="1" lighting-color="white">
-              <fespotlight id="spotlight" x="0" y="0" z="300" pointsatx="100" pointsaty="150" pointsatz="80" specularexponent="2" limitingconeangle="27"></fespotlight>
+              <fespotlight id="spotlight" x="0" y="0" z="400" pointsatx="100" pointsaty="150" pointsatz="200" specularexponent="2" limitingconeangle="27"></fespotlight>
             </fediffuselighting>
             <fecolormatrix in="diffOut" result="alphaMap" type="luminanceToAlpha"></fecolormatrix>
             <fecomponenttransfer in="alphaMap" result="invertlight">
@@ -1661,131 +1773,246 @@ kernelMatrix="<mark>1 1 1 1 1 1 -2 -2 -2 1 1 -2 0 -2 1 1 -2 -2 -2 1 1 1 1 1 1</m
 
 
 
-            <feimage xlink:href="img/texture1.png" result="texture1-res" preserveaspectratio="none" />
+            <feimage xlink:href="img/oldpaper.jpg" preserveaspectratio="none" result="texture1-res" />
             <feblend id="blend-1" result="ee1" in="rr" in2="texture1-res" mode="screen"></feblend>
 
-            <!--Spotlight-->
-            <feflood id="rc" result="blackfield-0" x="0%" y="0%" width="100%" height="100%" in="SourceGraphic" flood-color="#000000" flood-opacity="1"></feflood>
-            <fespecularlighting id="specular-0" result="Spotlight-0" lighting-color="#FFFFFF" surfacescale="1" specularconstant="1" specularexponent="20">
-              <fepointlight id="pointlight-0" x="100" y="200" z="400"></fepointlight>
-            </fespecularlighting><feblend id="svg-31" result="A-0" in="blackfield-0" in2="Spotlight-0" mode="lighten"></feblend>
-            
 
-            <feblend id="blend-0" result="ee13" in="A-0" in2="ee1" mode="darken"></feblend>
 
         </filter>
+        
     </defs>
+
     <image filter="url(#f19)" xlink:href="img/girl.jpg" width="100%" height="100%" preserveaspectratio="xMidYMid meet" />
+        
+    <g>
+    <radialgradient id="MyGradient">
+      <stop offset="40%" stop-color="#000000" stop-opacity="0" />
+      <stop offset="80%" stop-color="#000000" stop-opacity="1" id="vignette" />
+    </radialgradient>
+    <ellipse fill="url(#MyGradient)" cx="50%" cy="50%" rx="100%" ry="100%" />
+    </g>
 </svg>
 
 </div></section>
-<section class="slide cover w h headerlabel" id="section-23"><div><h2>Вновь девушка</h2>
+<section class="slide cover w h headerlabel" id="section-24"><div><h2>Вновь девушка</h2>
 
 <svg width="1024" height="768">
-    <image xlink:href="img/girl.jpg" width="100%" height="100%" preserveaspectratio="xMidYMid meet" />
+    <image xlink:href="img/kuk.jpg" width="100%" height="100%" preserveaspectratio="xMidYMid meet" />
 </svg>
 
 </div></section>
-<section class="slide" id="section-24"><div><h2>Борщ</h2>
+<section class="slide cover w h headerlabel" id="scary1"><div><h2>scary1</h2>
 
-<svg width="600" height="400">
-    <image xlink:href="pictures/borsch.jpg" width="100%" height="100%" preserveaspectratio="xMidYMid meet" />
+<svg width="1024" height="768">
+  <defs>
+    <filter id="fscary1">           
+      <fegaussianblur id="b1-0" result="blurOut-0" in="SourceGraphic" stddeviation="16" />
+      <fecomposite id="c1-0" in="SourceGraphic" in2="blurOut-0" operator="arithmetic" k1="0" k2="2.600000" k3="-1.600000" k4="0" />
+
+      <fecomponenttransfer id="svg-11" result="transfer-0">
+          <fefuncr type="table" id="redChannel-0" tablevalues="0.0000, 0.1965, 0.4000, 0.5656, 0.7276, 0.8862, 1.0000" />
+      </fecomponenttransfer>
+
+      <!--Blue curve-->
+      <fecomponenttransfer id="svg-12" result="transfer-1">
+          <fefuncb type="table" id="blueChannel-1" tablevalues="0.0000, 0.1138, 0.2586, 0.4104, 0.5793, 0.7689, 1.0000" />
+      </fecomponenttransfer>
+
+
+      <fecolormatrix type="saturate" values="0.2" result="sat-res" />
+
+      <fecolormatrix in="SourceGraphic" type="matrix" values=".1 .19 .119 0 0 .249 .626 .130 0 0 .172 .334 .111 0 0 .000 .000 .000 1 0" />
+
+      <fecolormatrix type="luminanceToAlpha" />
+      <feconvolvematrix order="3" kernelmatrix="-1 -2 -1 0 0 0 1 2 1" />
+      <feconvolvematrix order="3" kernelmatrix="-1 -2 -1 0 0 0 1 2 1" result="edge-res" />
+
+
+      <feimage xlink:href="img/overlay13.jpg" result="texture1-res" preserveaspectratio="none" />
+      <feimage xlink:href="img/overlay11.jpg" result="texture3-res" preserveaspectratio="xMinYMin" />
+      <feimage xlink:href="img/overlay12.jpg" result="texture2-res" preserveaspectratio="xMaxYMax" />
+      <feimage xlink:href="img/frame11.jpg" result="texture4-res" preserveaspectratio="none" />
+
+      <feblend in="sat-res" in2="edge-res" result="edges" mode="darken" />
+
+      <feblend in="edges" in2="texture1-res" result="a" mode="multiply" />
+      <feblend in="texture2-res" in2="a" result="b" mode="multiply" />
+      <feblend in="texture3-res" in2="b" result="c" mode="multiply" />
+      <feblend in="texture4-res" in2="c" mode="darken" />
+    </filter>
+  </defs>
+  <image filter="url(#fscary1)" xlink:href="img/kuk.jpg" width="100%" height="100%" />
 </svg>
 
 </div></section>
-<section class="slide" id="eating-borsch-russian-food"><div><h2>Eating #borsch #russian #food</h2>
+<section class="slide cover w h headerlabel" id="scary2"><div><h2>scary2</h2>
 
-<svg width="600" height="400">
-    <defs>
-        <filter id="f9" filterunits="userSpaceOnUse" primitiveunits="userSpaceOnUse">
-            
-            <!--Soften-Sharpen-->
-            <fegaussianblur id="b1-0" result="blurOut-0" in="SourceGraphic" stddeviation="30" />
-            <fecomposite id="c1-0" result="dynResult-0" in="SourceGraphic" in2="blurOut-0" operator="arithmetic" k1="0" k2="1.600000" k3="-0.600000" k4="0" />
+<svg width="1024" height="768">
+  <defs>
+    <filter id="fscary2">           
+      <fegaussianblur id="b1-0" result="blurOut-0" in="SourceGraphic" stddeviation="16" />
+      <fecomposite id="c1-0" in="SourceGraphic" in2="blurOut-0" operator="arithmetic" k1="0" k2="2.600000" k3="-1.600000" k4="0" />
 
-            <!-- Blur-all-except face -->
-            <fediffuselighting result="diffOut" diffuseconstant="1" lighting-color="white">
-              <fespotlight id="spotlight" x="0" y="0" z="150" pointsatx="240" pointsaty="150" pointsatz="120" specularexponent="12" limitingconeangle="100"></fespotlight>
-            </fediffuselighting>
-            <fecolormatrix in="diffOut" result="alphaMap" type="luminanceToAlpha"></fecolormatrix>
-            <fecomponenttransfer in="alphaMap" result="invertlight">
-                <fefunca type="table" tablevalues="1 0 0 0 0"></fefunca>
-            </fecomponenttransfer>
-            <fegaussianblur in="invertlight" result="featherspot" stddeviation="10"></fegaussianblur>
-            <fecomposite operator="xor" result="infocus" in2="dynResult-0" in="featherspot"></fecomposite>     
-            <fegaussianblur in="SourceGraphic" result="outfocus" stddeviation="7"></fegaussianblur>
-            <fecomposite operator="over" in="infocus" in2="outfocus"></fecomposite>     
-  
-            <!--saturate-->      
-            <fecolormatrix type="saturate" values="2" result="rr" />
-
-            <!--Spotlight-->
-            <feflood id="flood-0" result="blackfield-0" x="0%" y="0%" width="100%" height="100%" in="SourceGraphic" flood-color="#000000" flood-opacity="1"></feflood>
-            <fespecularlighting id="specular-0" result="Spotlight-0" lighting-color="#FFFFFF" surfacescale="1" specularconstant="1" specularexponent="60">
-              <fepointlight id="pointlight-0" x="400" y="200" z="500"></fepointlight>
-            </fespecularlighting><feblend id="svg-31" result="A-0" in="blackfield-0" in2="Spotlight-0" mode="lighten"></feblend>
-            <feblend id="blend-0" result="ee" in="A-0" in2="rr" mode="multiply"></feblend>
+      <fecolormatrix type="hueRotate" values="181" />
+      <fecolormatrix type="saturate" values="0.5" result="sat-res" />
 
 
-<!--Border--><feflood id="flood-0" result="outside-0" x="-10" y="-10" width="620" height="420" in="ee" flood-color="#FFFFFF" flood-opacity="1"></feflood><feflood id="flood-outer-0" result="inside-0" x="20" y="20" width="560" height="360" in="ee" flood-color="#FFFFFF" flood-opacity="1"></feflood><fecomposite id="svg-35" result="B-0" in="outside-0" in2="inside-0" operator="out"></fecomposite><fegaussianblur id="blur-0" result="bluroverlay-0" in="B-0" stddeviation="5"></fegaussianblur><feblend id="blend-0" result="C-0" in="ee" in2="bluroverlay-0" mode="lighten"></feblend><fecomposite id="svg-36" result="D-0" in="C-0" in2="ee" operator="in"></fecomposite>
+      <fecolormatrix in="SourceGraphic" type="matrix" values=".1 .19 .119 0 0 .249 .626 .130 0 0 .172 .334 .111 0 0 .000 .000 .000 1 0" />
+
+      <fecolormatrix type="luminanceToAlpha" />
+      <feconvolvematrix order="3" kernelmatrix="-1 -2 -1 0 0 0 1 2 1" />
+      <feconvolvematrix order="3" kernelmatrix="-1 -2 -1 0 0 0 1 2 1" result="edge-res" />
 
 
- <!--Border-->
-        </filter>
-    </defs>
-    <image filter="url(#f9)" xlink:href="pictures/borsch.jpg" width="100%" height="100%" preserveaspectratio="xMidYMid meet" />
+      <feimage xlink:href="img/overlay21.jpg" result="texture1-res" preserveaspectratio="xMidYMax" />
+      <feimage xlink:href="img/overlay22.jpg" result="texture3-res" preserveaspectratio="none" />
+      <feimage xlink:href="img/overlay23.jpg" result="texture2-res" preserveaspectratio="none" />
+      <feimage xlink:href="img/frame21.jpg" result="texture4-res" preserveaspectratio="none" />
+
+      <feblend in="sat-res" in2="edge-res" result="edges" mode="darken" />
+
+      <feblend in="edges" in2="texture1-res" result="a" mode="multiply" />
+      <feblend in="texture2-res" in2="a" result="b" mode="multiply" />
+      <feblend in="texture3-res" in2="b" result="c" mode="multiply" />
+      <feblend in="texture4-res" in2="c" mode="multiply" />            
+    </filter>
+  </defs>
+  <image filter="url(#fscary2)" xlink:href="img/kuk.jpg" width="100%" height="100%" />
 </svg>
 
 </div></section>
-<section class="slide" id="section-25"><div><h2>Еще 3-5 слайдов примеров</h2>
+<section class="slide cover w h headerlabel" id="scary3"><div><h2>scary3</h2>
+
+<svg width="1024" height="768">
+  <defs>
+    <filter id="fscary3">           
+      <fegaussianblur id="b1-0" result="blurOut-0" in="SourceGraphic" stddeviation="16" />
+      <fecomposite id="c1-0" in="SourceGraphic" in2="blurOut-0" operator="arithmetic" k1="0" k2="2.600000" k3="-1.600000" k4="0" />
+
+      <!--Red curve-->
+      <fecomponenttransfer id="svg-4" result="transfer-0">
+          <fefuncr type="table" id="redChannel-0" tablevalues="0.0103, 0.2034, 0.3965, 0.6035, 0.7931, 0.9103, 1.0000" />
+      </fecomponenttransfer>
+
+      <!--Blue curve-->
+      <fecomponenttransfer id="svg-5" result="transfer-1">
+          <fefuncb type="table" id="blueChannel-1" tablevalues="0.0000, 0.1517, 0.2862, 0.4656, 0.6276, 0.8034, 1.0000" />
+      </fecomponenttransfer>
+
+
+      <fecolormatrix type="saturate" values="0.7" result="sat-res" />
+
+      <fecolormatrix in="SourceGraphic" type="matrix" values=".1 .19 .119 0 0 .249 .626 .130 0 0 .172 .334 .111 0 0 .000 .000 .000 1 0" />
+      <fecolormatrix type="luminanceToAlpha" />
+      <feconvolvematrix order="3" kernelmatrix="-1 -2 -1 0 0 0 1 2 1" />
+      <feconvolvematrix order="3" kernelmatrix="-1 -2 -1 0 0 0 1 2 1" result="edge-res" />
+
+
+      <feimage xlink:href="img/overlay31.jpg" result="texture1-res" preserveaspectratio="xMinYMid" />
+      <feimage xlink:href="img/overlay32.jpg" result="texture2-res" preserveaspectratio="none" />
+      <feimage xlink:href="img/overlay33.jpg" result="texture3-res" preserveaspectratio="none" />
+      <feimage xlink:href="img/frame31.jpg" result="texture4-res" preserveaspectratio="none" />
+
+      <feblend in="sat-res" in2="edge-res" result="edges" mode="darken" />
+
+      <feblend in="edges" in2="texture1-res" result="a" mode="multiply" />
+      <feblend in="texture2-res" in2="a" result="b" mode="multiply" />
+      <feblend in="texture3-res" in2="b" result="c" mode="multiply" />
+      <feblend in="texture4-res" in2="c" mode="darken" />
+    
+    </filter>
+  </defs>
+  <image filter="url(#fscary3)" xlink:href="img/kuk.jpg" width="100%" height="100%" />
+</svg>
 
 </div></section>
-<section class="slide" id="svg-"><div><h2>Достоинства SVG фильтров</h2>
+<section class="slide" id="svg------"><div><h2>Достоинства SVG фильтров и почему мы выбрали их.</h2>
+
+<ol>
+  <li class="next">Быстрые.</li>
+  <li class="next">Не нужно никаких дополнительных библиотек. </li>
+  <li class="next">Поддержка разветвленных структур.</li>
+  <li class="next">Cупер возможности, огромная спецификация.</li>
+  <li class="next">Встроенная поддержка анимаций.</li>
+  <li class="next">Возможность фильтрации картинок с любых доменов.</li>
+</ol>
 
 </div></section>
-<section class="slide" id="svg--1"><div><h2>Недостатки SVG фильтров</h2>
+<section class="slide" id="svg--4"><div><h2>Недостатки SVG фильтров</h2>
+
+<ol>
+  <li class="next">IE10+, android-браузер 4.4+</li>
+  <li class="next">Необходимость вкладывать изображение внуть SVG</li>
+</ol>
 
 </div></section>
 <section class="slide shout" class="cover" id="hhh4"><div><h2>SVG filters for html</h2>
 
 </div></section>
-<section class="slide" id="svg-filters-for-html"><div><h2>Слайд про SVG filters for html</h2>
+<section class="slide code10 noheader" id="svg-filters-for-html"><div><h2>Слайд про SVG filters for html</h2>
+<pre><code>&lt;svg&gt;
+  &lt;defs&gt;
+    &lt;filter id="<mark>f1</mark>"&gt;
+      &lt;feGaussianBlur  stdDeviation="10"/&gt;
+    &lt;/filter&gt;
+  &lt;/defs&gt;
+&lt;/svg&gt;
+
+img {
+  -webkit-filter: url(<mark>#f1</mark>);
+  filter: url(<mark>#f1</mark>);   
+}
+</code></pre>
 
 </div></section>
-<section class="slide" id="svg-filters-for-html-1"><div><h2>Достоинства SVG filters for html</h2>
+<section class="slide code10 noheader" id="svg-filters-for-html-1"><div><h2>Слайд про SVG filters for html</h2>
+<pre><code>&lt;svg&gt;
+  &lt;defs&gt;
+    &lt;filter id="f1"&gt;
+      &lt;feGaussianBlur stdDeviation="10 0"/&gt;
+    &lt;/filter&gt;
+  &lt;/defs&gt;
+&lt;/svg&gt;
+
+<mark>div</mark> {
+  -webkit-filter: url(#f1);
+  filter: url(#f1);   
+}
+</code></pre>
 
 </div></section>
-<section class="slide" id="svg-filters-for-html-2"><div><h2>Недостатки SVG filters for html</h2>
+<section class="slide cover w h headerlabel" id="rit"><div><h2>rit</h2>
+
+<svg width="1024" height="768">
+    <image xlink:href="img/rit.png" width="100%" height="100%" preserveaspectratio="xMidYMid meet" />
+</svg>
+
+<!-- filter id="f1">
+  <feColorMatrix type="matrix" values="0.343 0.669 0.119 0 0 0.249 0.626 0.130 0 0 0.172 0.334 0.111 0 0 0 0 0 1 0"></feColorMatrix>
+  <feColorMatrix type="hueRotate" values="250"></feColorMatrix>
+  <feColorMatrix type="saturate" result="sat-res" values="5"></feColorMatrix>
+  <feBlend in="sat-res" in2="edge-res" result="edges" mode="darken"></feBlend>
+</filter -->
 
 </div></section>
-<section class="slide shout" class="cover" id="hhh5"><div><h2>CSS filter effects</h2>
+<section class="slide shout" class="cover" id="hhhw"><div><h2>Вопросы?</h2>
+<p><img src="img/end.gif" /></p>
 
 </div></section>
-<section class="slide" id="svg-filters-effects"><div><h2>Слайд про SVG filters effects</h2>
+<section class="slide code12 noheader gray" id="goodbye"><div><h2>goodbye</h2>
 
-</div></section>
-<section class="slide" id="css-filter-effects"><div><h2>Достоинства CSS filter effects</h2>
+<div class="sociallinks">
+  <a class="social" href="http://facebook.com/html5by">facebook.com/<span style="font-weight:bold;color:white !important;">html5by</span><img src="img/fb.png" /></a><br />
+  <a class="social" href="http://twitter.com/html5by">twitter.com/<span style="font-weight:bold;color:white !important;">html5by</span><img src="img/tw.png" /></a><br />
+  <a class="social" href="http://vk.com/html5by">vk.com/<span style="font-weight:bold;color:white !important;">html5by</span><img src="img/vk.png" /></a><br />
+</div>
 
-</div></section>
-<section class="slide" id="css-filter-effects-1"><div><h2>Недостатки CSS filter effects</h2>
-
-</div></section>
-<section class="slide shout" class="cover" id="hhh6"><div><h2>CSS shaders</h2>
-
-</div></section>
-<section class="slide" id="css-shaders"><div><h2>Слайд про CSS shaders</h2>
-
-</div></section>
-<section class="slide" id="css-shaders-1"><div><h2>Достоинства CSS shaders</h2>
-
-</div></section>
-<section class="slide" id="css-shaders-2"><div><h2>Недостатки CSS shaders</h2>
-
-</div></section>
-<section class="slide shout" class="cover" id="hhh7"><div><h2>Вопросы?</h2>
-
-</div></section>
-<section class="slide" id="section-26"><div><h2>Тут мои контакты</h2>
+<div style="height:300px;">
+  <a href="http://xbsoftware.com" target="_blank"><img style="height:64px; width: auto; margin:0 20px;" src="img/logo-xbsoftware.png" /></a>
+  <a href="http://webix.com" target="_blank"><img style="height:64px; width: auto; margin:0 20px;" src="img/logo-webix.png" /></a>
+  <a href="http://enjoycss.com" target="_blank"><img style="height:64px; width: auto; margin:0 20px; " src="img/logo-enjoycss.png" /></a>
+  <a href="http://html5.by" target="_blank"><img style="height:64px; width: auto; margin:0 20px;" src="img/html5by-logo-flat-256.png" /></a>
+</div>
 
 </div></section>
 
