@@ -10,11 +10,11 @@ default_lang: en
 default_body_class: list
 
 author:
-    name: Yours Truly
-    # url:  http://example.com/
+    name: "Дмитрий Дудин @nedudi"
+    url:  http://twitter.com/nedudi
     company:
-        name: Famous Inc.
-        # url:  http://example.com/
+        name: "via @html5by"
+        url:  http://html5.by
 
 fork_url: https://github.com/shower/shower
 progress: false
